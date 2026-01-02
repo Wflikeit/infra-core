@@ -49,7 +49,7 @@ message RemoteAccessConfiguration {
     (buf.validate.field).ignore = IGNORE_IF_UNPOPULATED
   ];
 
-  // Port terminating reverse SSH tunnel (on orchestrator side)
+  // Port terminating reverse SSH tunnel (on orchestrator side), RAP
   // Set by resource manager.
   uint32 local_port = 5 [
     (ent.field) = {
@@ -63,36 +63,64 @@ message RemoteAccessConfiguration {
     (buf.validate.field).ignore = IGNORE_IF_UNPOPULATED
   ];
 
+  // RAP WebSocket host used by the agent to establish connection.
+  string proxy_host = 6 [
+    (ent.field) = { optional: true },
+    (buf.validate.field).string = { min_len: 3 },
+    (buf.validate.field).ignore = IGNORE_IF_UNPOPULATED
+  ];
+
   // Name of remote user configured on SSH server running on EN
   // Set by resource manager.
-  string user = 6 [
+  string user = 7 [
     (ent.field) = {optional: true},
     (buf.validate.field).string = {max_len: 20},
     (buf.validate.field).ignore = IGNORE_IF_UNPOPULATED
   ];
 
+  // Shared secret or session token for agent authentication to RAP.
+  string session_token = 8 [
+    (ent.field) = { optional: true },
+    (buf.validate.field).string = { min_len: 3 },
+    (buf.validate.field).ignore = IGNORE_IF_UNPOPULATED
+  ];
+
+  // Host on the edge side where the agent should forward traffic (e.g. 127.0.0.1). ex. Xterm frontend
+  string target_host = 9 [
+    (ent.field) = { optional: true },
+    (buf.validate.field).string = { min_len: 1, max_len: 255 },
+    (buf.validate.field).ignore = IGNORE_IF_UNPOPULATED
+  ];
+
+  // Port on the edge side where the agent should forward traffic (e.g. 22). ex. Xterm frontend
+  uint32 target_port = 10 [
+    (ent.field) = { optional: true },
+    (buf.validate.field).uint32 = { gte: 1, lte: 65535 },
+    (buf.validate.field).ignore = IGNORE_IF_UNPOPULATED
+  ];
+
   // Expresses current state of remote  access.
   // Managed by resource manager on behalf of provider.
-  RemoteAccessState current_state = 10 [(ent.field) = {optional: true}];
+  RemoteAccessState current_state = 11 [(ent.field) = {optional: true}];
 
   // Expresses desired state of remote access. Set by an administrator.
-  RemoteAccessState desired_state = 11;
+  RemoteAccessState desired_state = 12;
 
   // A group of fields describing the remote access configuration.
   // Configuration status of the resource according to the provider.
   // configuration_status, configuration_status_indicator and configuration_status_timestamp
   // should always be updated in one shot.
-  string configuration_status = 12 [
+  string configuration_status = 13 [
     (ent.field) = {optional: true},
     (buf.validate.field).string = {max_bytes: 1024},
     (buf.validate.field).ignore = IGNORE_IF_UNPOPULATED
   ]; // textual message that describes the update status of Instance. Set by RMs only.
 
   // Indicates interpretation of configuration_status. Set by RMs only.
-  status.v1.StatusIndication configuration_status_indicator = 13 [(ent.field) = {optional: true}];
+  status.v1.StatusIndication configuration_status_indicator = 14 [(ent.field) = {optional: true}];
 
   // UTC timestamp when status was last changed. Set by RMs only.
-  uint64 configuration_status_timestamp = 14 [(ent.field) = {optional: true}];
+  uint64 configuration_status_timestamp = 15 [(ent.field) = {optional: true}];
 
   string tenant_id = 100 [
     (ent.field) = {
@@ -102,7 +130,7 @@ message RemoteAccessConfiguration {
     (buf.validate.field).string = {
       uuid: true
       max_bytes: 36
-    },
+     },
     (buf.validate.field).ignore = IGNORE_IF_UNPOPULATED
   ]; // Tenant Identifier
 
@@ -136,4 +164,6 @@ enum RemoteAccessState {
   REMOTE_ACCESS_STATE_DELETED = 1;
   REMOTE_ACCESS_STATE_ERROR = 2;
   REMOTE_ACCESS_STATE_ENABLED = 3;
+  REMOTE_ACCESS_STATE_DISABLED = 4;
+  REMOTE_ACCESS_STATE_CONFIGURED = 5;
 }

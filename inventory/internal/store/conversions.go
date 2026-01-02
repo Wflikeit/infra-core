@@ -588,22 +588,30 @@ func entRemoteAccessConfigurationToProto(entity *ent.RemoteAccessConfiguration) 
 	if entity == nil {
 		return nil
 	}
+
 	statusIndicator := statusv1.StatusIndication_value[entity.ConfigurationStatusIndicator.String()]
 	desiredState := remoteaccessv1.RemoteAccessState_value[entity.DesiredState.String()]
 	currentState := remoteaccessv1.RemoteAccessState_value[entity.CurrentState.String()]
+
 	protoResource := &remoteaccessv1.RemoteAccessConfiguration{
 		ConfigurationStatus:          entity.ConfigurationStatus,
 		ConfigurationStatusIndicator: statusv1.StatusIndication(statusIndicator),
 		ConfigurationStatusTimestamp: entity.ConfigurationStatusTimestamp,
-		ExpirationTimestamp:          entity.ExpirationTimestamp,
-		LocalPort:                    entity.LocalPort,
-		ResourceId:                   entity.ResourceID,
-		DesiredState:                 remoteaccessv1.RemoteAccessState(desiredState),
-		CurrentState:                 remoteaccessv1.RemoteAccessState(currentState),
-		User:                         entity.User,
-		TenantId:                     entity.TenantID,
-		CreatedAt:                    entity.CreatedAt,
-		UpdatedAt:                    entity.UpdatedAt,
+
+		ExpirationTimestamp: entity.ExpirationTimestamp,
+		LocalPort:           entity.LocalPort,
+		ProxyHost:           entity.ProxyHost,
+		User:                entity.User,
+		SessionToken:        entity.SessionToken,
+		TargetHost:          entity.TargetHost,
+		TargetPort:          uint32(entity.TargetPort),
+
+		ResourceId:   entity.ResourceID,
+		DesiredState: remoteaccessv1.RemoteAccessState(desiredState),
+		CurrentState: remoteaccessv1.RemoteAccessState(currentState),
+		TenantId:     entity.TenantID,
+		CreatedAt:    entity.CreatedAt,
+		UpdatedAt:    entity.UpdatedAt,
 	}
 
 	if inst, err := entity.Edges.InstanceOrErr(); err == nil {

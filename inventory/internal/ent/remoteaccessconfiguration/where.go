@@ -68,9 +68,29 @@ func LocalPort(v uint32) predicate.RemoteAccessConfiguration {
 	return predicate.RemoteAccessConfiguration(sql.FieldEQ(FieldLocalPort, v))
 }
 
+// ProxyHost applies equality check predicate on the "proxy_host" field. It's identical to ProxyHostEQ.
+func ProxyHost(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldEQ(FieldProxyHost, v))
+}
+
 // User applies equality check predicate on the "user" field. It's identical to UserEQ.
 func User(v string) predicate.RemoteAccessConfiguration {
 	return predicate.RemoteAccessConfiguration(sql.FieldEQ(FieldUser, v))
+}
+
+// SessionToken applies equality check predicate on the "session_token" field. It's identical to SessionTokenEQ.
+func SessionToken(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldEQ(FieldSessionToken, v))
+}
+
+// TargetHost applies equality check predicate on the "target_host" field. It's identical to TargetHostEQ.
+func TargetHost(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldEQ(FieldTargetHost, v))
+}
+
+// TargetPort applies equality check predicate on the "target_port" field. It's identical to TargetPortEQ.
+func TargetPort(v uint32) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldEQ(FieldTargetPort, v))
 }
 
 // ConfigurationStatus applies equality check predicate on the "configuration_status" field. It's identical to ConfigurationStatusEQ.
@@ -253,6 +273,81 @@ func LocalPortNotNil() predicate.RemoteAccessConfiguration {
 	return predicate.RemoteAccessConfiguration(sql.FieldNotNull(FieldLocalPort))
 }
 
+// ProxyHostEQ applies the EQ predicate on the "proxy_host" field.
+func ProxyHostEQ(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldEQ(FieldProxyHost, v))
+}
+
+// ProxyHostNEQ applies the NEQ predicate on the "proxy_host" field.
+func ProxyHostNEQ(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldNEQ(FieldProxyHost, v))
+}
+
+// ProxyHostIn applies the In predicate on the "proxy_host" field.
+func ProxyHostIn(vs ...string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldIn(FieldProxyHost, vs...))
+}
+
+// ProxyHostNotIn applies the NotIn predicate on the "proxy_host" field.
+func ProxyHostNotIn(vs ...string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldNotIn(FieldProxyHost, vs...))
+}
+
+// ProxyHostGT applies the GT predicate on the "proxy_host" field.
+func ProxyHostGT(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldGT(FieldProxyHost, v))
+}
+
+// ProxyHostGTE applies the GTE predicate on the "proxy_host" field.
+func ProxyHostGTE(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldGTE(FieldProxyHost, v))
+}
+
+// ProxyHostLT applies the LT predicate on the "proxy_host" field.
+func ProxyHostLT(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldLT(FieldProxyHost, v))
+}
+
+// ProxyHostLTE applies the LTE predicate on the "proxy_host" field.
+func ProxyHostLTE(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldLTE(FieldProxyHost, v))
+}
+
+// ProxyHostContains applies the Contains predicate on the "proxy_host" field.
+func ProxyHostContains(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldContains(FieldProxyHost, v))
+}
+
+// ProxyHostHasPrefix applies the HasPrefix predicate on the "proxy_host" field.
+func ProxyHostHasPrefix(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldHasPrefix(FieldProxyHost, v))
+}
+
+// ProxyHostHasSuffix applies the HasSuffix predicate on the "proxy_host" field.
+func ProxyHostHasSuffix(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldHasSuffix(FieldProxyHost, v))
+}
+
+// ProxyHostIsNil applies the IsNil predicate on the "proxy_host" field.
+func ProxyHostIsNil() predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldIsNull(FieldProxyHost))
+}
+
+// ProxyHostNotNil applies the NotNil predicate on the "proxy_host" field.
+func ProxyHostNotNil() predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldNotNull(FieldProxyHost))
+}
+
+// ProxyHostEqualFold applies the EqualFold predicate on the "proxy_host" field.
+func ProxyHostEqualFold(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldEqualFold(FieldProxyHost, v))
+}
+
+// ProxyHostContainsFold applies the ContainsFold predicate on the "proxy_host" field.
+func ProxyHostContainsFold(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldContainsFold(FieldProxyHost, v))
+}
+
 // UserEQ applies the EQ predicate on the "user" field.
 func UserEQ(v string) predicate.RemoteAccessConfiguration {
 	return predicate.RemoteAccessConfiguration(sql.FieldEQ(FieldUser, v))
@@ -326,6 +421,206 @@ func UserEqualFold(v string) predicate.RemoteAccessConfiguration {
 // UserContainsFold applies the ContainsFold predicate on the "user" field.
 func UserContainsFold(v string) predicate.RemoteAccessConfiguration {
 	return predicate.RemoteAccessConfiguration(sql.FieldContainsFold(FieldUser, v))
+}
+
+// SessionTokenEQ applies the EQ predicate on the "session_token" field.
+func SessionTokenEQ(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldEQ(FieldSessionToken, v))
+}
+
+// SessionTokenNEQ applies the NEQ predicate on the "session_token" field.
+func SessionTokenNEQ(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldNEQ(FieldSessionToken, v))
+}
+
+// SessionTokenIn applies the In predicate on the "session_token" field.
+func SessionTokenIn(vs ...string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldIn(FieldSessionToken, vs...))
+}
+
+// SessionTokenNotIn applies the NotIn predicate on the "session_token" field.
+func SessionTokenNotIn(vs ...string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldNotIn(FieldSessionToken, vs...))
+}
+
+// SessionTokenGT applies the GT predicate on the "session_token" field.
+func SessionTokenGT(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldGT(FieldSessionToken, v))
+}
+
+// SessionTokenGTE applies the GTE predicate on the "session_token" field.
+func SessionTokenGTE(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldGTE(FieldSessionToken, v))
+}
+
+// SessionTokenLT applies the LT predicate on the "session_token" field.
+func SessionTokenLT(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldLT(FieldSessionToken, v))
+}
+
+// SessionTokenLTE applies the LTE predicate on the "session_token" field.
+func SessionTokenLTE(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldLTE(FieldSessionToken, v))
+}
+
+// SessionTokenContains applies the Contains predicate on the "session_token" field.
+func SessionTokenContains(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldContains(FieldSessionToken, v))
+}
+
+// SessionTokenHasPrefix applies the HasPrefix predicate on the "session_token" field.
+func SessionTokenHasPrefix(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldHasPrefix(FieldSessionToken, v))
+}
+
+// SessionTokenHasSuffix applies the HasSuffix predicate on the "session_token" field.
+func SessionTokenHasSuffix(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldHasSuffix(FieldSessionToken, v))
+}
+
+// SessionTokenIsNil applies the IsNil predicate on the "session_token" field.
+func SessionTokenIsNil() predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldIsNull(FieldSessionToken))
+}
+
+// SessionTokenNotNil applies the NotNil predicate on the "session_token" field.
+func SessionTokenNotNil() predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldNotNull(FieldSessionToken))
+}
+
+// SessionTokenEqualFold applies the EqualFold predicate on the "session_token" field.
+func SessionTokenEqualFold(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldEqualFold(FieldSessionToken, v))
+}
+
+// SessionTokenContainsFold applies the ContainsFold predicate on the "session_token" field.
+func SessionTokenContainsFold(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldContainsFold(FieldSessionToken, v))
+}
+
+// TargetHostEQ applies the EQ predicate on the "target_host" field.
+func TargetHostEQ(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldEQ(FieldTargetHost, v))
+}
+
+// TargetHostNEQ applies the NEQ predicate on the "target_host" field.
+func TargetHostNEQ(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldNEQ(FieldTargetHost, v))
+}
+
+// TargetHostIn applies the In predicate on the "target_host" field.
+func TargetHostIn(vs ...string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldIn(FieldTargetHost, vs...))
+}
+
+// TargetHostNotIn applies the NotIn predicate on the "target_host" field.
+func TargetHostNotIn(vs ...string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldNotIn(FieldTargetHost, vs...))
+}
+
+// TargetHostGT applies the GT predicate on the "target_host" field.
+func TargetHostGT(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldGT(FieldTargetHost, v))
+}
+
+// TargetHostGTE applies the GTE predicate on the "target_host" field.
+func TargetHostGTE(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldGTE(FieldTargetHost, v))
+}
+
+// TargetHostLT applies the LT predicate on the "target_host" field.
+func TargetHostLT(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldLT(FieldTargetHost, v))
+}
+
+// TargetHostLTE applies the LTE predicate on the "target_host" field.
+func TargetHostLTE(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldLTE(FieldTargetHost, v))
+}
+
+// TargetHostContains applies the Contains predicate on the "target_host" field.
+func TargetHostContains(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldContains(FieldTargetHost, v))
+}
+
+// TargetHostHasPrefix applies the HasPrefix predicate on the "target_host" field.
+func TargetHostHasPrefix(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldHasPrefix(FieldTargetHost, v))
+}
+
+// TargetHostHasSuffix applies the HasSuffix predicate on the "target_host" field.
+func TargetHostHasSuffix(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldHasSuffix(FieldTargetHost, v))
+}
+
+// TargetHostIsNil applies the IsNil predicate on the "target_host" field.
+func TargetHostIsNil() predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldIsNull(FieldTargetHost))
+}
+
+// TargetHostNotNil applies the NotNil predicate on the "target_host" field.
+func TargetHostNotNil() predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldNotNull(FieldTargetHost))
+}
+
+// TargetHostEqualFold applies the EqualFold predicate on the "target_host" field.
+func TargetHostEqualFold(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldEqualFold(FieldTargetHost, v))
+}
+
+// TargetHostContainsFold applies the ContainsFold predicate on the "target_host" field.
+func TargetHostContainsFold(v string) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldContainsFold(FieldTargetHost, v))
+}
+
+// TargetPortEQ applies the EQ predicate on the "target_port" field.
+func TargetPortEQ(v uint32) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldEQ(FieldTargetPort, v))
+}
+
+// TargetPortNEQ applies the NEQ predicate on the "target_port" field.
+func TargetPortNEQ(v uint32) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldNEQ(FieldTargetPort, v))
+}
+
+// TargetPortIn applies the In predicate on the "target_port" field.
+func TargetPortIn(vs ...uint32) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldIn(FieldTargetPort, vs...))
+}
+
+// TargetPortNotIn applies the NotIn predicate on the "target_port" field.
+func TargetPortNotIn(vs ...uint32) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldNotIn(FieldTargetPort, vs...))
+}
+
+// TargetPortGT applies the GT predicate on the "target_port" field.
+func TargetPortGT(v uint32) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldGT(FieldTargetPort, v))
+}
+
+// TargetPortGTE applies the GTE predicate on the "target_port" field.
+func TargetPortGTE(v uint32) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldGTE(FieldTargetPort, v))
+}
+
+// TargetPortLT applies the LT predicate on the "target_port" field.
+func TargetPortLT(v uint32) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldLT(FieldTargetPort, v))
+}
+
+// TargetPortLTE applies the LTE predicate on the "target_port" field.
+func TargetPortLTE(v uint32) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldLTE(FieldTargetPort, v))
+}
+
+// TargetPortIsNil applies the IsNil predicate on the "target_port" field.
+func TargetPortIsNil() predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldIsNull(FieldTargetPort))
+}
+
+// TargetPortNotNil applies the NotNil predicate on the "target_port" field.
+func TargetPortNotNil() predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldNotNull(FieldTargetPort))
 }
 
 // CurrentStateEQ applies the EQ predicate on the "current_state" field.

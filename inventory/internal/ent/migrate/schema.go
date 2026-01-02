@@ -795,9 +795,13 @@ var (
 		{Name: "resource_id", Type: field.TypeString, Unique: true},
 		{Name: "expiration_timestamp", Type: field.TypeUint64},
 		{Name: "local_port", Type: field.TypeUint32, Unique: true, Nullable: true},
+		{Name: "proxy_host", Type: field.TypeString, Nullable: true},
 		{Name: "user", Type: field.TypeString, Nullable: true},
-		{Name: "current_state", Type: field.TypeEnum, Nullable: true, Enums: []string{"REMOTE_ACCESS_STATE_UNSPECIFIED", "REMOTE_ACCESS_STATE_DELETED", "REMOTE_ACCESS_STATE_ERROR", "REMOTE_ACCESS_STATE_ENABLED"}},
-		{Name: "desired_state", Type: field.TypeEnum, Enums: []string{"REMOTE_ACCESS_STATE_UNSPECIFIED", "REMOTE_ACCESS_STATE_DELETED", "REMOTE_ACCESS_STATE_ERROR", "REMOTE_ACCESS_STATE_ENABLED"}},
+		{Name: "session_token", Type: field.TypeString, Nullable: true},
+		{Name: "target_host", Type: field.TypeString, Nullable: true},
+		{Name: "target_port", Type: field.TypeUint32, Nullable: true},
+		{Name: "current_state", Type: field.TypeEnum, Nullable: true, Enums: []string{"REMOTE_ACCESS_STATE_UNSPECIFIED", "REMOTE_ACCESS_STATE_DELETED", "REMOTE_ACCESS_STATE_ERROR", "REMOTE_ACCESS_STATE_ENABLED", "REMOTE_ACCESS_STATE_DISABLED", "REMOTE_ACCESS_STATE_CONFIGURED"}},
+		{Name: "desired_state", Type: field.TypeEnum, Enums: []string{"REMOTE_ACCESS_STATE_UNSPECIFIED", "REMOTE_ACCESS_STATE_DELETED", "REMOTE_ACCESS_STATE_ERROR", "REMOTE_ACCESS_STATE_ENABLED", "REMOTE_ACCESS_STATE_DISABLED", "REMOTE_ACCESS_STATE_CONFIGURED"}},
 		{Name: "configuration_status", Type: field.TypeString, Nullable: true},
 		{Name: "configuration_status_indicator", Type: field.TypeEnum, Nullable: true, Enums: []string{"STATUS_INDICATION_UNSPECIFIED", "STATUS_INDICATION_ERROR", "STATUS_INDICATION_IN_PROGRESS", "STATUS_INDICATION_IDLE"}},
 		{Name: "configuration_status_timestamp", Type: field.TypeUint64, Nullable: true},
@@ -814,7 +818,7 @@ var (
 		ForeignKeys: []*schema.ForeignKey{
 			{
 				Symbol:     "remote_access_configurations_instance_resources_instance",
-				Columns:    []*schema.Column{RemoteAccessConfigurationsColumns[13]},
+				Columns:    []*schema.Column{RemoteAccessConfigurationsColumns[17]},
 				RefColumns: []*schema.Column{InstanceResourcesColumns[0]},
 				OnDelete:   schema.NoAction,
 			},
@@ -823,7 +827,7 @@ var (
 			{
 				Name:    "remoteaccessconfiguration_tenant_id",
 				Unique:  false,
-				Columns: []*schema.Column{RemoteAccessConfigurationsColumns[10]},
+				Columns: []*schema.Column{RemoteAccessConfigurationsColumns[14]},
 			},
 		},
 	}

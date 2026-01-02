@@ -20,8 +20,16 @@ const (
 	FieldExpirationTimestamp = "expiration_timestamp"
 	// FieldLocalPort holds the string denoting the local_port field in the database.
 	FieldLocalPort = "local_port"
+	// FieldProxyHost holds the string denoting the proxy_host field in the database.
+	FieldProxyHost = "proxy_host"
 	// FieldUser holds the string denoting the user field in the database.
 	FieldUser = "user"
+	// FieldSessionToken holds the string denoting the session_token field in the database.
+	FieldSessionToken = "session_token"
+	// FieldTargetHost holds the string denoting the target_host field in the database.
+	FieldTargetHost = "target_host"
+	// FieldTargetPort holds the string denoting the target_port field in the database.
+	FieldTargetPort = "target_port"
 	// FieldCurrentState holds the string denoting the current_state field in the database.
 	FieldCurrentState = "current_state"
 	// FieldDesiredState holds the string denoting the desired_state field in the database.
@@ -57,7 +65,11 @@ var Columns = []string{
 	FieldResourceID,
 	FieldExpirationTimestamp,
 	FieldLocalPort,
+	FieldProxyHost,
 	FieldUser,
+	FieldSessionToken,
+	FieldTargetHost,
+	FieldTargetPort,
 	FieldCurrentState,
 	FieldDesiredState,
 	FieldConfigurationStatus,
@@ -98,6 +110,8 @@ const (
 	CurrentStateREMOTE_ACCESS_STATE_DELETED     CurrentState = "REMOTE_ACCESS_STATE_DELETED"
 	CurrentStateREMOTE_ACCESS_STATE_ERROR       CurrentState = "REMOTE_ACCESS_STATE_ERROR"
 	CurrentStateREMOTE_ACCESS_STATE_ENABLED     CurrentState = "REMOTE_ACCESS_STATE_ENABLED"
+	CurrentStateREMOTE_ACCESS_STATE_DISABLED    CurrentState = "REMOTE_ACCESS_STATE_DISABLED"
+	CurrentStateREMOTE_ACCESS_STATE_CONFIGURED  CurrentState = "REMOTE_ACCESS_STATE_CONFIGURED"
 )
 
 func (cs CurrentState) String() string {
@@ -107,7 +121,7 @@ func (cs CurrentState) String() string {
 // CurrentStateValidator is a validator for the "current_state" field enum values. It is called by the builders before save.
 func CurrentStateValidator(cs CurrentState) error {
 	switch cs {
-	case CurrentStateREMOTE_ACCESS_STATE_UNSPECIFIED, CurrentStateREMOTE_ACCESS_STATE_DELETED, CurrentStateREMOTE_ACCESS_STATE_ERROR, CurrentStateREMOTE_ACCESS_STATE_ENABLED:
+	case CurrentStateREMOTE_ACCESS_STATE_UNSPECIFIED, CurrentStateREMOTE_ACCESS_STATE_DELETED, CurrentStateREMOTE_ACCESS_STATE_ERROR, CurrentStateREMOTE_ACCESS_STATE_ENABLED, CurrentStateREMOTE_ACCESS_STATE_DISABLED, CurrentStateREMOTE_ACCESS_STATE_CONFIGURED:
 		return nil
 	default:
 		return fmt.Errorf("remoteaccessconfiguration: invalid enum value for current_state field: %q", cs)
@@ -123,6 +137,8 @@ const (
 	DesiredStateREMOTE_ACCESS_STATE_DELETED     DesiredState = "REMOTE_ACCESS_STATE_DELETED"
 	DesiredStateREMOTE_ACCESS_STATE_ERROR       DesiredState = "REMOTE_ACCESS_STATE_ERROR"
 	DesiredStateREMOTE_ACCESS_STATE_ENABLED     DesiredState = "REMOTE_ACCESS_STATE_ENABLED"
+	DesiredStateREMOTE_ACCESS_STATE_DISABLED    DesiredState = "REMOTE_ACCESS_STATE_DISABLED"
+	DesiredStateREMOTE_ACCESS_STATE_CONFIGURED  DesiredState = "REMOTE_ACCESS_STATE_CONFIGURED"
 )
 
 func (ds DesiredState) String() string {
@@ -132,7 +148,7 @@ func (ds DesiredState) String() string {
 // DesiredStateValidator is a validator for the "desired_state" field enum values. It is called by the builders before save.
 func DesiredStateValidator(ds DesiredState) error {
 	switch ds {
-	case DesiredStateREMOTE_ACCESS_STATE_UNSPECIFIED, DesiredStateREMOTE_ACCESS_STATE_DELETED, DesiredStateREMOTE_ACCESS_STATE_ERROR, DesiredStateREMOTE_ACCESS_STATE_ENABLED:
+	case DesiredStateREMOTE_ACCESS_STATE_UNSPECIFIED, DesiredStateREMOTE_ACCESS_STATE_DELETED, DesiredStateREMOTE_ACCESS_STATE_ERROR, DesiredStateREMOTE_ACCESS_STATE_ENABLED, DesiredStateREMOTE_ACCESS_STATE_DISABLED, DesiredStateREMOTE_ACCESS_STATE_CONFIGURED:
 		return nil
 	default:
 		return fmt.Errorf("remoteaccessconfiguration: invalid enum value for desired_state field: %q", ds)
@@ -187,9 +203,29 @@ func ByLocalPort(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldLocalPort, opts...).ToFunc()
 }
 
+// ByProxyHost orders the results by the proxy_host field.
+func ByProxyHost(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldProxyHost, opts...).ToFunc()
+}
+
 // ByUser orders the results by the user field.
 func ByUser(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldUser, opts...).ToFunc()
+}
+
+// BySessionToken orders the results by the session_token field.
+func BySessionToken(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldSessionToken, opts...).ToFunc()
+}
+
+// ByTargetHost orders the results by the target_host field.
+func ByTargetHost(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldTargetHost, opts...).ToFunc()
+}
+
+// ByTargetPort orders the results by the target_port field.
+func ByTargetPort(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldTargetPort, opts...).ToFunc()
 }
 
 // ByCurrentState orders the results by the current_state field.
