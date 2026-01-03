@@ -30,6 +30,7 @@ import (
 	"github.com/open-edge-platform/infra-core/inventory/v2/pkg/util"
 )
 
+// TODO: add tests for new fields
 func Test_RemoteAccessConfiguration_Lifecycle(t *testing.T) {
 	os := inv_testing.CreateOs(t)
 

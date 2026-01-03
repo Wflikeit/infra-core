@@ -69,6 +69,26 @@ func (_u *RemoteAccessConfigurationUpdate) ClearLocalPort() *RemoteAccessConfigu
 	return _u
 }
 
+// SetProxyHost sets the "proxy_host" field.
+func (_u *RemoteAccessConfigurationUpdate) SetProxyHost(v string) *RemoteAccessConfigurationUpdate {
+	_u.mutation.SetProxyHost(v)
+	return _u
+}
+
+// SetNillableProxyHost sets the "proxy_host" field if the given value is not nil.
+func (_u *RemoteAccessConfigurationUpdate) SetNillableProxyHost(v *string) *RemoteAccessConfigurationUpdate {
+	if v != nil {
+		_u.SetProxyHost(*v)
+	}
+	return _u
+}
+
+// ClearProxyHost clears the value of the "proxy_host" field.
+func (_u *RemoteAccessConfigurationUpdate) ClearProxyHost() *RemoteAccessConfigurationUpdate {
+	_u.mutation.ClearProxyHost()
+	return _u
+}
+
 // SetUser sets the "user" field.
 func (_u *RemoteAccessConfigurationUpdate) SetUser(v string) *RemoteAccessConfigurationUpdate {
 	_u.mutation.SetUser(v)
@@ -86,6 +106,73 @@ func (_u *RemoteAccessConfigurationUpdate) SetNillableUser(v *string) *RemoteAcc
 // ClearUser clears the value of the "user" field.
 func (_u *RemoteAccessConfigurationUpdate) ClearUser() *RemoteAccessConfigurationUpdate {
 	_u.mutation.ClearUser()
+	return _u
+}
+
+// SetSessionToken sets the "session_token" field.
+func (_u *RemoteAccessConfigurationUpdate) SetSessionToken(v string) *RemoteAccessConfigurationUpdate {
+	_u.mutation.SetSessionToken(v)
+	return _u
+}
+
+// SetNillableSessionToken sets the "session_token" field if the given value is not nil.
+func (_u *RemoteAccessConfigurationUpdate) SetNillableSessionToken(v *string) *RemoteAccessConfigurationUpdate {
+	if v != nil {
+		_u.SetSessionToken(*v)
+	}
+	return _u
+}
+
+// ClearSessionToken clears the value of the "session_token" field.
+func (_u *RemoteAccessConfigurationUpdate) ClearSessionToken() *RemoteAccessConfigurationUpdate {
+	_u.mutation.ClearSessionToken()
+	return _u
+}
+
+// SetTargetHost sets the "target_host" field.
+func (_u *RemoteAccessConfigurationUpdate) SetTargetHost(v string) *RemoteAccessConfigurationUpdate {
+	_u.mutation.SetTargetHost(v)
+	return _u
+}
+
+// SetNillableTargetHost sets the "target_host" field if the given value is not nil.
+func (_u *RemoteAccessConfigurationUpdate) SetNillableTargetHost(v *string) *RemoteAccessConfigurationUpdate {
+	if v != nil {
+		_u.SetTargetHost(*v)
+	}
+	return _u
+}
+
+// ClearTargetHost clears the value of the "target_host" field.
+func (_u *RemoteAccessConfigurationUpdate) ClearTargetHost() *RemoteAccessConfigurationUpdate {
+	_u.mutation.ClearTargetHost()
+	return _u
+}
+
+// SetTargetPort sets the "target_port" field.
+func (_u *RemoteAccessConfigurationUpdate) SetTargetPort(v uint32) *RemoteAccessConfigurationUpdate {
+	_u.mutation.ResetTargetPort()
+	_u.mutation.SetTargetPort(v)
+	return _u
+}
+
+// SetNillableTargetPort sets the "target_port" field if the given value is not nil.
+func (_u *RemoteAccessConfigurationUpdate) SetNillableTargetPort(v *uint32) *RemoteAccessConfigurationUpdate {
+	if v != nil {
+		_u.SetTargetPort(*v)
+	}
+	return _u
+}
+
+// AddTargetPort adds value to the "target_port" field.
+func (_u *RemoteAccessConfigurationUpdate) AddTargetPort(v int32) *RemoteAccessConfigurationUpdate {
+	_u.mutation.AddTargetPort(v)
+	return _u
+}
+
+// ClearTargetPort clears the value of the "target_port" field.
+func (_u *RemoteAccessConfigurationUpdate) ClearTargetPort() *RemoteAccessConfigurationUpdate {
+	_u.mutation.ClearTargetPort()
 	return _u
 }
 
@@ -300,11 +387,38 @@ func (_u *RemoteAccessConfigurationUpdate) sqlSave(ctx context.Context) (_node i
 	if _u.mutation.LocalPortCleared() {
 		_spec.ClearField(remoteaccessconfiguration.FieldLocalPort, field.TypeUint32)
 	}
+	if value, ok := _u.mutation.ProxyHost(); ok {
+		_spec.SetField(remoteaccessconfiguration.FieldProxyHost, field.TypeString, value)
+	}
+	if _u.mutation.ProxyHostCleared() {
+		_spec.ClearField(remoteaccessconfiguration.FieldProxyHost, field.TypeString)
+	}
 	if value, ok := _u.mutation.User(); ok {
 		_spec.SetField(remoteaccessconfiguration.FieldUser, field.TypeString, value)
 	}
 	if _u.mutation.UserCleared() {
 		_spec.ClearField(remoteaccessconfiguration.FieldUser, field.TypeString)
+	}
+	if value, ok := _u.mutation.SessionToken(); ok {
+		_spec.SetField(remoteaccessconfiguration.FieldSessionToken, field.TypeString, value)
+	}
+	if _u.mutation.SessionTokenCleared() {
+		_spec.ClearField(remoteaccessconfiguration.FieldSessionToken, field.TypeString)
+	}
+	if value, ok := _u.mutation.TargetHost(); ok {
+		_spec.SetField(remoteaccessconfiguration.FieldTargetHost, field.TypeString, value)
+	}
+	if _u.mutation.TargetHostCleared() {
+		_spec.ClearField(remoteaccessconfiguration.FieldTargetHost, field.TypeString)
+	}
+	if value, ok := _u.mutation.TargetPort(); ok {
+		_spec.SetField(remoteaccessconfiguration.FieldTargetPort, field.TypeUint32, value)
+	}
+	if value, ok := _u.mutation.AddedTargetPort(); ok {
+		_spec.AddField(remoteaccessconfiguration.FieldTargetPort, field.TypeUint32, value)
+	}
+	if _u.mutation.TargetPortCleared() {
+		_spec.ClearField(remoteaccessconfiguration.FieldTargetPort, field.TypeUint32)
 	}
 	if value, ok := _u.mutation.CurrentState(); ok {
 		_spec.SetField(remoteaccessconfiguration.FieldCurrentState, field.TypeEnum, value)
@@ -429,6 +543,26 @@ func (_u *RemoteAccessConfigurationUpdateOne) ClearLocalPort() *RemoteAccessConf
 	return _u
 }
 
+// SetProxyHost sets the "proxy_host" field.
+func (_u *RemoteAccessConfigurationUpdateOne) SetProxyHost(v string) *RemoteAccessConfigurationUpdateOne {
+	_u.mutation.SetProxyHost(v)
+	return _u
+}
+
+// SetNillableProxyHost sets the "proxy_host" field if the given value is not nil.
+func (_u *RemoteAccessConfigurationUpdateOne) SetNillableProxyHost(v *string) *RemoteAccessConfigurationUpdateOne {
+	if v != nil {
+		_u.SetProxyHost(*v)
+	}
+	return _u
+}
+
+// ClearProxyHost clears the value of the "proxy_host" field.
+func (_u *RemoteAccessConfigurationUpdateOne) ClearProxyHost() *RemoteAccessConfigurationUpdateOne {
+	_u.mutation.ClearProxyHost()
+	return _u
+}
+
 // SetUser sets the "user" field.
 func (_u *RemoteAccessConfigurationUpdateOne) SetUser(v string) *RemoteAccessConfigurationUpdateOne {
 	_u.mutation.SetUser(v)
@@ -446,6 +580,73 @@ func (_u *RemoteAccessConfigurationUpdateOne) SetNillableUser(v *string) *Remote
 // ClearUser clears the value of the "user" field.
 func (_u *RemoteAccessConfigurationUpdateOne) ClearUser() *RemoteAccessConfigurationUpdateOne {
 	_u.mutation.ClearUser()
+	return _u
+}
+
+// SetSessionToken sets the "session_token" field.
+func (_u *RemoteAccessConfigurationUpdateOne) SetSessionToken(v string) *RemoteAccessConfigurationUpdateOne {
+	_u.mutation.SetSessionToken(v)
+	return _u
+}
+
+// SetNillableSessionToken sets the "session_token" field if the given value is not nil.
+func (_u *RemoteAccessConfigurationUpdateOne) SetNillableSessionToken(v *string) *RemoteAccessConfigurationUpdateOne {
+	if v != nil {
+		_u.SetSessionToken(*v)
+	}
+	return _u
+}
+
+// ClearSessionToken clears the value of the "session_token" field.
+func (_u *RemoteAccessConfigurationUpdateOne) ClearSessionToken() *RemoteAccessConfigurationUpdateOne {
+	_u.mutation.ClearSessionToken()
+	return _u
+}
+
+// SetTargetHost sets the "target_host" field.
+func (_u *RemoteAccessConfigurationUpdateOne) SetTargetHost(v string) *RemoteAccessConfigurationUpdateOne {
+	_u.mutation.SetTargetHost(v)
+	return _u
+}
+
+// SetNillableTargetHost sets the "target_host" field if the given value is not nil.
+func (_u *RemoteAccessConfigurationUpdateOne) SetNillableTargetHost(v *string) *RemoteAccessConfigurationUpdateOne {
+	if v != nil {
+		_u.SetTargetHost(*v)
+	}
+	return _u
+}
+
+// ClearTargetHost clears the value of the "target_host" field.
+func (_u *RemoteAccessConfigurationUpdateOne) ClearTargetHost() *RemoteAccessConfigurationUpdateOne {
+	_u.mutation.ClearTargetHost()
+	return _u
+}
+
+// SetTargetPort sets the "target_port" field.
+func (_u *RemoteAccessConfigurationUpdateOne) SetTargetPort(v uint32) *RemoteAccessConfigurationUpdateOne {
+	_u.mutation.ResetTargetPort()
+	_u.mutation.SetTargetPort(v)
+	return _u
+}
+
+// SetNillableTargetPort sets the "target_port" field if the given value is not nil.
+func (_u *RemoteAccessConfigurationUpdateOne) SetNillableTargetPort(v *uint32) *RemoteAccessConfigurationUpdateOne {
+	if v != nil {
+		_u.SetTargetPort(*v)
+	}
+	return _u
+}
+
+// AddTargetPort adds value to the "target_port" field.
+func (_u *RemoteAccessConfigurationUpdateOne) AddTargetPort(v int32) *RemoteAccessConfigurationUpdateOne {
+	_u.mutation.AddTargetPort(v)
+	return _u
+}
+
+// ClearTargetPort clears the value of the "target_port" field.
+func (_u *RemoteAccessConfigurationUpdateOne) ClearTargetPort() *RemoteAccessConfigurationUpdateOne {
+	_u.mutation.ClearTargetPort()
 	return _u
 }
 
@@ -690,11 +891,38 @@ func (_u *RemoteAccessConfigurationUpdateOne) sqlSave(ctx context.Context) (_nod
 	if _u.mutation.LocalPortCleared() {
 		_spec.ClearField(remoteaccessconfiguration.FieldLocalPort, field.TypeUint32)
 	}
+	if value, ok := _u.mutation.ProxyHost(); ok {
+		_spec.SetField(remoteaccessconfiguration.FieldProxyHost, field.TypeString, value)
+	}
+	if _u.mutation.ProxyHostCleared() {
+		_spec.ClearField(remoteaccessconfiguration.FieldProxyHost, field.TypeString)
+	}
 	if value, ok := _u.mutation.User(); ok {
 		_spec.SetField(remoteaccessconfiguration.FieldUser, field.TypeString, value)
 	}
 	if _u.mutation.UserCleared() {
 		_spec.ClearField(remoteaccessconfiguration.FieldUser, field.TypeString)
+	}
+	if value, ok := _u.mutation.SessionToken(); ok {
+		_spec.SetField(remoteaccessconfiguration.FieldSessionToken, field.TypeString, value)
+	}
+	if _u.mutation.SessionTokenCleared() {
+		_spec.ClearField(remoteaccessconfiguration.FieldSessionToken, field.TypeString)
+	}
+	if value, ok := _u.mutation.TargetHost(); ok {
+		_spec.SetField(remoteaccessconfiguration.FieldTargetHost, field.TypeString, value)
+	}
+	if _u.mutation.TargetHostCleared() {
+		_spec.ClearField(remoteaccessconfiguration.FieldTargetHost, field.TypeString)
+	}
+	if value, ok := _u.mutation.TargetPort(); ok {
+		_spec.SetField(remoteaccessconfiguration.FieldTargetPort, field.TypeUint32, value)
+	}
+	if value, ok := _u.mutation.AddedTargetPort(); ok {
+		_spec.AddField(remoteaccessconfiguration.FieldTargetPort, field.TypeUint32, value)
+	}
+	if _u.mutation.TargetPortCleared() {
+		_spec.ClearField(remoteaccessconfiguration.FieldTargetPort, field.TypeUint32)
 	}
 	if value, ok := _u.mutation.CurrentState(); ok {
 		_spec.SetField(remoteaccessconfiguration.FieldCurrentState, field.TypeEnum, value)

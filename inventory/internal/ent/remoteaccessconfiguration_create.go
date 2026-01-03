@@ -46,6 +46,20 @@ func (_c *RemoteAccessConfigurationCreate) SetNillableLocalPort(v *uint32) *Remo
 	return _c
 }
 
+// SetProxyHost sets the "proxy_host" field.
+func (_c *RemoteAccessConfigurationCreate) SetProxyHost(v string) *RemoteAccessConfigurationCreate {
+	_c.mutation.SetProxyHost(v)
+	return _c
+}
+
+// SetNillableProxyHost sets the "proxy_host" field if the given value is not nil.
+func (_c *RemoteAccessConfigurationCreate) SetNillableProxyHost(v *string) *RemoteAccessConfigurationCreate {
+	if v != nil {
+		_c.SetProxyHost(*v)
+	}
+	return _c
+}
+
 // SetUser sets the "user" field.
 func (_c *RemoteAccessConfigurationCreate) SetUser(v string) *RemoteAccessConfigurationCreate {
 	_c.mutation.SetUser(v)
@@ -56,6 +70,48 @@ func (_c *RemoteAccessConfigurationCreate) SetUser(v string) *RemoteAccessConfig
 func (_c *RemoteAccessConfigurationCreate) SetNillableUser(v *string) *RemoteAccessConfigurationCreate {
 	if v != nil {
 		_c.SetUser(*v)
+	}
+	return _c
+}
+
+// SetSessionToken sets the "session_token" field.
+func (_c *RemoteAccessConfigurationCreate) SetSessionToken(v string) *RemoteAccessConfigurationCreate {
+	_c.mutation.SetSessionToken(v)
+	return _c
+}
+
+// SetNillableSessionToken sets the "session_token" field if the given value is not nil.
+func (_c *RemoteAccessConfigurationCreate) SetNillableSessionToken(v *string) *RemoteAccessConfigurationCreate {
+	if v != nil {
+		_c.SetSessionToken(*v)
+	}
+	return _c
+}
+
+// SetTargetHost sets the "target_host" field.
+func (_c *RemoteAccessConfigurationCreate) SetTargetHost(v string) *RemoteAccessConfigurationCreate {
+	_c.mutation.SetTargetHost(v)
+	return _c
+}
+
+// SetNillableTargetHost sets the "target_host" field if the given value is not nil.
+func (_c *RemoteAccessConfigurationCreate) SetNillableTargetHost(v *string) *RemoteAccessConfigurationCreate {
+	if v != nil {
+		_c.SetTargetHost(*v)
+	}
+	return _c
+}
+
+// SetTargetPort sets the "target_port" field.
+func (_c *RemoteAccessConfigurationCreate) SetTargetPort(v uint32) *RemoteAccessConfigurationCreate {
+	_c.mutation.SetTargetPort(v)
+	return _c
+}
+
+// SetNillableTargetPort sets the "target_port" field if the given value is not nil.
+func (_c *RemoteAccessConfigurationCreate) SetNillableTargetPort(v *uint32) *RemoteAccessConfigurationCreate {
+	if v != nil {
+		_c.SetTargetPort(*v)
 	}
 	return _c
 }
@@ -259,9 +315,25 @@ func (_c *RemoteAccessConfigurationCreate) createSpec() (*RemoteAccessConfigurat
 		_spec.SetField(remoteaccessconfiguration.FieldLocalPort, field.TypeUint32, value)
 		_node.LocalPort = value
 	}
+	if value, ok := _c.mutation.ProxyHost(); ok {
+		_spec.SetField(remoteaccessconfiguration.FieldProxyHost, field.TypeString, value)
+		_node.ProxyHost = value
+	}
 	if value, ok := _c.mutation.User(); ok {
 		_spec.SetField(remoteaccessconfiguration.FieldUser, field.TypeString, value)
 		_node.User = value
+	}
+	if value, ok := _c.mutation.SessionToken(); ok {
+		_spec.SetField(remoteaccessconfiguration.FieldSessionToken, field.TypeString, value)
+		_node.SessionToken = value
+	}
+	if value, ok := _c.mutation.TargetHost(); ok {
+		_spec.SetField(remoteaccessconfiguration.FieldTargetHost, field.TypeString, value)
+		_node.TargetHost = value
+	}
+	if value, ok := _c.mutation.TargetPort(); ok {
+		_spec.SetField(remoteaccessconfiguration.FieldTargetPort, field.TypeUint32, value)
+		_node.TargetPort = value
 	}
 	if value, ok := _c.mutation.CurrentState(); ok {
 		_spec.SetField(remoteaccessconfiguration.FieldCurrentState, field.TypeEnum, value)
