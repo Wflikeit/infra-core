@@ -21,7 +21,7 @@ var (
 	Host4Name     = "Host-Four"
 	HostUnexistID = "host-00000000"
 	HostWrongID   = "HOST-123"
-	//nolint:stylecheck // We need non-printable characters in the name to check validation rules.
+	//nolint:stylecheck,staticcheck // We need non-printable characters in the name to check validation rules.
 	HostNameNonPrintable = "0x73t116 0x74r114 0x67…&#8230 \u2026⟶​9 0x65U+200B&#8203; \u200Bh104"
 
 	Region1Name     = "region-12345678"
@@ -626,13 +626,13 @@ var (
 		OsProvider:   &OSProvider,
 	}
 	OSResource1ReqwithInstallPackages = api.OperatingSystemResource{
-		Name:              &OSName1,
-		Architecture:      &OSArch1,
-		RepoUrl:           &OSRepo1,
-		Sha256:            inv_testing.GenerateRandomSha256(),
-		InstalledPackages: &OSInstalledPackages,
-		OsType:            &OsTypeMutable,
-		OsProvider:        &OSProvider,
+		Name:         &OSName1,
+		Architecture: &OSArch1,
+		RepoUrl:      &OSRepo1,
+		Sha256:       inv_testing.GenerateRandomSha256(),
+		// InstalledPackages is a read-only field and should not be set on create
+		OsType:     &OsTypeMutable,
+		OsProvider: &OSProvider,
 	}
 
 	clusterUUID1            = uuid.NewString()

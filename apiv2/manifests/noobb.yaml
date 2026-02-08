@@ -1,0 +1,21 @@
+---
+# SPDX-FileCopyrightText: (C) 2026 Intel Corporation
+# SPDX-License-Identifier: Apache-2.0
+
+name: noobb
+description: EIM scenario with all EIM Northbound API services, excluding observability endpoints.
+services:
+  - RegionService
+  - SiteService
+  - LocationService
+  - HostService
+  - OperatingSystemService
+  - InstanceService
+  - ScheduleService
+  - WorkloadService
+  - WorkloadMemberService
+  - ProviderService
+  - LocalAccountService
+  - CustomConfigService
+  - OSUpdatePolicyService
+  - OSUpdateRunService

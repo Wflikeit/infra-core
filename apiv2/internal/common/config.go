@@ -21,6 +21,8 @@ const (
 	DefaultTimeout                      = 10
 	BaseRESTURL                         = "baseRESTURL"
 	BaseRESTURLDescription              = "The REST server base URL"
+	NexusAPIURL                         = "nexusAPIURL"
+	NexusAPIURLDescription              = "The Nexus API base URL for project resolution"
 	RestTimeout                         = "restTimeout"
 	RestTimeoutDescription              = "Timeout for a REST API call (in seconds)"
 	EnableRateLimiter                   = "enableRateLimiter"
@@ -38,6 +40,7 @@ const (
 	WstDefaultMaxConnectionsDescription = "The maximum number of concurrent websocket connections"
 	EnableAuditing                      = "enableAuditing"
 	EnableAuditingDescription           = "Flag to enable audit logs for REST API calls."
+	DefaultScenario                     = "fulleim"
 )
 
 type Traces struct {
@@ -48,6 +51,7 @@ type Traces struct {
 type RestServer struct {
 	Address           string
 	BaseURL           string
+	NexusAPIURL       string
 	Timeout           time.Duration
 	Cors              string
 	EchoDebug         bool
@@ -83,6 +87,7 @@ type GlobalConfig struct {
 	Inventory      Southbound
 	Websocket      Websocket
 	EnableAuditing bool
+	EIMScenario    string
 }
 
 type Websocket struct {
@@ -97,7 +102,8 @@ func DefaultConfig() *GlobalConfig {
 		},
 		RestServer: RestServer{
 			Address:           "0.0.0.0:8080",
-			BaseURL:           "/edge-infra.orchestrator.apis/v2",
+			BaseURL:           "",
+			NexusAPIURL:       "http://localhost:8082",
 			Timeout:           DefaultTimeout * time.Second,
 			Cors:              "",
 			EchoDebug:         false,
@@ -124,6 +130,7 @@ func DefaultConfig() *GlobalConfig {
 		EnableAuditing: true,
 		GRPCAddress:    "0.0.0.0:8090",
 		GRPCEndpoint:   "localhost:8090",
+		EIMScenario:    DefaultScenario,
 	}
 }
 
@@ -132,6 +139,7 @@ func Config() (*GlobalConfig, error) {
 
 	serverAddress := flag.String(flags.ServerAddress, defaultCfg.RestServer.Address, flags.ServerAddressDescription)
 	baseURL := flag.String(BaseRESTURL, defaultCfg.RestServer.BaseURL, BaseRESTURLDescription)
+	nexusAPIURL := flag.String(NexusAPIURL, defaultCfg.RestServer.NexusAPIURL, NexusAPIURLDescription)
 	restTimeout := flag.Duration(RestTimeout, defaultCfg.RestServer.Timeout, RestTimeoutDescription)
 	enableRateLimiter := flag.Bool(
 		EnableRateLimiter,
@@ -162,6 +170,7 @@ func Config() (*GlobalConfig, error) {
 	enableAuditing := flag.Bool(EnableAuditing, defaultCfg.EnableAuditing, EnableAuditingDescription)
 	gRPCEndpoint := flag.String("grpcEndpoint", defaultCfg.GRPCEndpoint, "The endpoint of the gRPC server")
 	gRPCAddress := flag.String("grpcAddress", defaultCfg.GRPCEndpoint, "The gRPC server address")
+	eimScenario := flag.String("eimScenario", defaultCfg.EIMScenario, "The EIM deployment scenario name")
 	flag.Parse()
 
 	return &GlobalConfig{
@@ -172,6 +181,7 @@ func Config() (*GlobalConfig, error) {
 		RestServer: RestServer{
 			Address:           *serverAddress,
 			BaseURL:           *baseURL,
+			NexusAPIURL:       *nexusAPIURL,
 			Timeout:           *restTimeout,
 			Cors:              *cors,
 			EchoDebug:         *echoDebug,
@@ -199,5 +209,6 @@ func Config() (*GlobalConfig, error) {
 		EnableAuditing: *enableAuditing,
 		GRPCEndpoint:   *gRPCEndpoint,
 		GRPCAddress:    *gRPCAddress,
+		EIMScenario:    *eimScenario,
 	}, nil
 }
