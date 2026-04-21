@@ -1295,8 +1295,6 @@ NetworkSegment represents a logical Layer 1 (L1) of the network and a VLAN (i.e.
 | proxy_host | [string](#string) |  | RAP WebSocket host used by the agent to establish connection. |
 | user | [string](#string) |  | Name of remote user configured on SSH server running on EN Set by resource manager. |
 | session_token | [string](#string) |  | Shared secret or session token for agent authentication to RAP. |
-| target_host | [string](#string) |  | Host on the edge side where the agent should forward traffic (e.g. 127.0.0.1). ex. Xterm frontend |
-| target_port | [uint32](#uint32) |  | Port on the edge side where the agent should forward traffic (e.g. 22). ex. Xterm frontend |
 | current_state | [RemoteAccessState](#remoteaccess-v1-RemoteAccessState) |  | Expresses current state of remote access. Managed by resource manager on behalf of provider. |
 | desired_state | [RemoteAccessState](#remoteaccess-v1-RemoteAccessState) |  | Expresses desired state of remote access. Set by an administrator. |
 | configuration_status | [string](#string) |  | A group of fields describing the remote access configuration. Configuration status of the resource according to the provider. configuration_status, configuration_status_indicator and configuration_status_timestamp should always be updated in one shot.

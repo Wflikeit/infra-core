@@ -26,10 +26,6 @@ const (
 	FieldUser = "user"
 	// FieldSessionToken holds the string denoting the session_token field in the database.
 	FieldSessionToken = "session_token"
-	// FieldTargetHost holds the string denoting the target_host field in the database.
-	FieldTargetHost = "target_host"
-	// FieldTargetPort holds the string denoting the target_port field in the database.
-	FieldTargetPort = "target_port"
 	// FieldCurrentState holds the string denoting the current_state field in the database.
 	FieldCurrentState = "current_state"
 	// FieldDesiredState holds the string denoting the desired_state field in the database.
@@ -68,8 +64,6 @@ var Columns = []string{
 	FieldProxyHost,
 	FieldUser,
 	FieldSessionToken,
-	FieldTargetHost,
-	FieldTargetPort,
 	FieldCurrentState,
 	FieldDesiredState,
 	FieldConfigurationStatus,
@@ -216,16 +210,6 @@ func ByUser(opts ...sql.OrderTermOption) OrderOption {
 // BySessionToken orders the results by the session_token field.
 func BySessionToken(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldSessionToken, opts...).ToFunc()
-}
-
-// ByTargetHost orders the results by the target_host field.
-func ByTargetHost(opts ...sql.OrderTermOption) OrderOption {
-	return sql.OrderByField(FieldTargetHost, opts...).ToFunc()
-}
-
-// ByTargetPort orders the results by the target_port field.
-func ByTargetPort(opts ...sql.OrderTermOption) OrderOption {
-	return sql.OrderByField(FieldTargetPort, opts...).ToFunc()
 }
 
 // ByCurrentState orders the results by the current_state field.

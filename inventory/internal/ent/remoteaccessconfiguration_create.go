@@ -88,34 +88,6 @@ func (_c *RemoteAccessConfigurationCreate) SetNillableSessionToken(v *string) *R
 	return _c
 }
 
-// SetTargetHost sets the "target_host" field.
-func (_c *RemoteAccessConfigurationCreate) SetTargetHost(v string) *RemoteAccessConfigurationCreate {
-	_c.mutation.SetTargetHost(v)
-	return _c
-}
-
-// SetNillableTargetHost sets the "target_host" field if the given value is not nil.
-func (_c *RemoteAccessConfigurationCreate) SetNillableTargetHost(v *string) *RemoteAccessConfigurationCreate {
-	if v != nil {
-		_c.SetTargetHost(*v)
-	}
-	return _c
-}
-
-// SetTargetPort sets the "target_port" field.
-func (_c *RemoteAccessConfigurationCreate) SetTargetPort(v uint32) *RemoteAccessConfigurationCreate {
-	_c.mutation.SetTargetPort(v)
-	return _c
-}
-
-// SetNillableTargetPort sets the "target_port" field if the given value is not nil.
-func (_c *RemoteAccessConfigurationCreate) SetNillableTargetPort(v *uint32) *RemoteAccessConfigurationCreate {
-	if v != nil {
-		_c.SetTargetPort(*v)
-	}
-	return _c
-}
-
 // SetCurrentState sets the "current_state" field.
 func (_c *RemoteAccessConfigurationCreate) SetCurrentState(v remoteaccessconfiguration.CurrentState) *RemoteAccessConfigurationCreate {
 	_c.mutation.SetCurrentState(v)
@@ -326,14 +298,6 @@ func (_c *RemoteAccessConfigurationCreate) createSpec() (*RemoteAccessConfigurat
 	if value, ok := _c.mutation.SessionToken(); ok {
 		_spec.SetField(remoteaccessconfiguration.FieldSessionToken, field.TypeString, value)
 		_node.SessionToken = value
-	}
-	if value, ok := _c.mutation.TargetHost(); ok {
-		_spec.SetField(remoteaccessconfiguration.FieldTargetHost, field.TypeString, value)
-		_node.TargetHost = value
-	}
-	if value, ok := _c.mutation.TargetPort(); ok {
-		_spec.SetField(remoteaccessconfiguration.FieldTargetPort, field.TypeUint32, value)
-		_node.TargetPort = value
 	}
 	if value, ok := _c.mutation.CurrentState(); ok {
 		_spec.SetField(remoteaccessconfiguration.FieldCurrentState, field.TypeEnum, value)

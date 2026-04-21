@@ -606,8 +606,6 @@ func entRemoteAccessConfigurationToProto(entity *ent.RemoteAccessConfiguration) 
 		ProxyHost:           entity.ProxyHost,
 		User:                entity.User,
 		SessionToken:        entity.SessionToken,
-		TargetHost:          entity.TargetHost,
-		TargetPort:          uint32(entity.TargetPort),
 
 		ResourceId:   entity.ResourceID,
 		DesiredState: remoteaccessv1.RemoteAccessState(desiredState),

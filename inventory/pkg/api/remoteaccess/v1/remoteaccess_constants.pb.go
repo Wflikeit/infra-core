@@ -13,8 +13,6 @@ const (
 	RemoteAccessConfigurationFieldProxyHost                    = "proxy_host"
 	RemoteAccessConfigurationFieldUser                         = "user"
 	RemoteAccessConfigurationFieldSessionToken                 = "session_token"
-	RemoteAccessConfigurationFieldTargetHost                   = "target_host"
-	RemoteAccessConfigurationFieldTargetPort                   = "target_port"
 	RemoteAccessConfigurationFieldCurrentState                 = "current_state"
 	RemoteAccessConfigurationFieldDesiredState                 = "desired_state"
 	RemoteAccessConfigurationFieldConfigurationStatus          = "configuration_status"

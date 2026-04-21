@@ -29,10 +29,6 @@ type RemoteAccessConfiguration struct {
 	User string `json:"user,omitempty"`
 	// SessionToken holds the value of the "session_token" field.
 	SessionToken string `json:"session_token,omitempty"`
-	// TargetHost holds the value of the "target_host" field.
-	TargetHost string `json:"target_host,omitempty"`
-	// TargetPort holds the value of the "target_port" field.
-	TargetPort uint32 `json:"target_port,omitempty"`
 	// CurrentState holds the value of the "current_state" field.
 	CurrentState remoteaccessconfiguration.CurrentState `json:"current_state,omitempty"`
 	// DesiredState holds the value of the "desired_state" field.
@@ -81,9 +77,9 @@ func (*RemoteAccessConfiguration) scanValues(columns []string) ([]any, error) {
 	values := make([]any, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case remoteaccessconfiguration.FieldID, remoteaccessconfiguration.FieldExpirationTimestamp, remoteaccessconfiguration.FieldLocalPort, remoteaccessconfiguration.FieldTargetPort, remoteaccessconfiguration.FieldConfigurationStatusTimestamp:
+		case remoteaccessconfiguration.FieldID, remoteaccessconfiguration.FieldExpirationTimestamp, remoteaccessconfiguration.FieldLocalPort, remoteaccessconfiguration.FieldConfigurationStatusTimestamp:
 			values[i] = new(sql.NullInt64)
-		case remoteaccessconfiguration.FieldResourceID, remoteaccessconfiguration.FieldProxyHost, remoteaccessconfiguration.FieldUser, remoteaccessconfiguration.FieldSessionToken, remoteaccessconfiguration.FieldTargetHost, remoteaccessconfiguration.FieldCurrentState, remoteaccessconfiguration.FieldDesiredState, remoteaccessconfiguration.FieldConfigurationStatus, remoteaccessconfiguration.FieldConfigurationStatusIndicator, remoteaccessconfiguration.FieldTenantID, remoteaccessconfiguration.FieldCreatedAt, remoteaccessconfiguration.FieldUpdatedAt:
+		case remoteaccessconfiguration.FieldResourceID, remoteaccessconfiguration.FieldProxyHost, remoteaccessconfiguration.FieldUser, remoteaccessconfiguration.FieldSessionToken, remoteaccessconfiguration.FieldCurrentState, remoteaccessconfiguration.FieldDesiredState, remoteaccessconfiguration.FieldConfigurationStatus, remoteaccessconfiguration.FieldConfigurationStatusIndicator, remoteaccessconfiguration.FieldTenantID, remoteaccessconfiguration.FieldCreatedAt, remoteaccessconfiguration.FieldUpdatedAt:
 			values[i] = new(sql.NullString)
 		case remoteaccessconfiguration.ForeignKeys[0]: // remote_access_configuration_instance
 			values[i] = new(sql.NullInt64)
@@ -143,18 +139,6 @@ func (_m *RemoteAccessConfiguration) assignValues(columns []string, values []any
 				return fmt.Errorf("unexpected type %T for field session_token", values[i])
 			} else if value.Valid {
 				_m.SessionToken = value.String
-			}
-		case remoteaccessconfiguration.FieldTargetHost:
-			if value, ok := values[i].(*sql.NullString); !ok {
-				return fmt.Errorf("unexpected type %T for field target_host", values[i])
-			} else if value.Valid {
-				_m.TargetHost = value.String
-			}
-		case remoteaccessconfiguration.FieldTargetPort:
-			if value, ok := values[i].(*sql.NullInt64); !ok {
-				return fmt.Errorf("unexpected type %T for field target_port", values[i])
-			} else if value.Valid {
-				_m.TargetPort = uint32(value.Int64)
 			}
 		case remoteaccessconfiguration.FieldCurrentState:
 			if value, ok := values[i].(*sql.NullString); !ok {
@@ -269,12 +253,6 @@ func (_m *RemoteAccessConfiguration) String() string {
 	builder.WriteString(", ")
 	builder.WriteString("session_token=")
 	builder.WriteString(_m.SessionToken)
-	builder.WriteString(", ")
-	builder.WriteString("target_host=")
-	builder.WriteString(_m.TargetHost)
-	builder.WriteString(", ")
-	builder.WriteString("target_port=")
-	builder.WriteString(fmt.Sprintf("%v", _m.TargetPort))
 	builder.WriteString(", ")
 	builder.WriteString("current_state=")
 	builder.WriteString(fmt.Sprintf("%v", _m.CurrentState))

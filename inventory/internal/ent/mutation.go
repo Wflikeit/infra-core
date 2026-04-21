@@ -26363,9 +26363,6 @@ type RemoteAccessConfigurationMutation struct {
 	proxy_host                        *string
 	user                              *string
 	session_token                     *string
-	target_host                       *string
-	target_port                       *uint32
-	addtarget_port                    *int32
 	current_state                     *remoteaccessconfiguration.CurrentState
 	desired_state                     *remoteaccessconfiguration.DesiredState
 	configuration_status              *string
@@ -26788,125 +26785,6 @@ func (m *RemoteAccessConfigurationMutation) SessionTokenCleared() bool {
 func (m *RemoteAccessConfigurationMutation) ResetSessionToken() {
 	m.session_token = nil
 	delete(m.clearedFields, remoteaccessconfiguration.FieldSessionToken)
-}
-
-// SetTargetHost sets the "target_host" field.
-func (m *RemoteAccessConfigurationMutation) SetTargetHost(s string) {
-	m.target_host = &s
-}
-
-// TargetHost returns the value of the "target_host" field in the mutation.
-func (m *RemoteAccessConfigurationMutation) TargetHost() (r string, exists bool) {
-	v := m.target_host
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldTargetHost returns the old "target_host" field's value of the RemoteAccessConfiguration entity.
-// If the RemoteAccessConfiguration object wasn't provided to the builder, the object is fetched from the database.
-// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *RemoteAccessConfigurationMutation) OldTargetHost(ctx context.Context) (v string, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldTargetHost is only allowed on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldTargetHost requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldTargetHost: %w", err)
-	}
-	return oldValue.TargetHost, nil
-}
-
-// ClearTargetHost clears the value of the "target_host" field.
-func (m *RemoteAccessConfigurationMutation) ClearTargetHost() {
-	m.target_host = nil
-	m.clearedFields[remoteaccessconfiguration.FieldTargetHost] = struct{}{}
-}
-
-// TargetHostCleared returns if the "target_host" field was cleared in this mutation.
-func (m *RemoteAccessConfigurationMutation) TargetHostCleared() bool {
-	_, ok := m.clearedFields[remoteaccessconfiguration.FieldTargetHost]
-	return ok
-}
-
-// ResetTargetHost resets all changes to the "target_host" field.
-func (m *RemoteAccessConfigurationMutation) ResetTargetHost() {
-	m.target_host = nil
-	delete(m.clearedFields, remoteaccessconfiguration.FieldTargetHost)
-}
-
-// SetTargetPort sets the "target_port" field.
-func (m *RemoteAccessConfigurationMutation) SetTargetPort(u uint32) {
-	m.target_port = &u
-	m.addtarget_port = nil
-}
-
-// TargetPort returns the value of the "target_port" field in the mutation.
-func (m *RemoteAccessConfigurationMutation) TargetPort() (r uint32, exists bool) {
-	v := m.target_port
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldTargetPort returns the old "target_port" field's value of the RemoteAccessConfiguration entity.
-// If the RemoteAccessConfiguration object wasn't provided to the builder, the object is fetched from the database.
-// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *RemoteAccessConfigurationMutation) OldTargetPort(ctx context.Context) (v uint32, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldTargetPort is only allowed on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldTargetPort requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldTargetPort: %w", err)
-	}
-	return oldValue.TargetPort, nil
-}
-
-// AddTargetPort adds u to the "target_port" field.
-func (m *RemoteAccessConfigurationMutation) AddTargetPort(u int32) {
-	if m.addtarget_port != nil {
-		*m.addtarget_port += u
-	} else {
-		m.addtarget_port = &u
-	}
-}
-
-// AddedTargetPort returns the value that was added to the "target_port" field in this mutation.
-func (m *RemoteAccessConfigurationMutation) AddedTargetPort() (r int32, exists bool) {
-	v := m.addtarget_port
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// ClearTargetPort clears the value of the "target_port" field.
-func (m *RemoteAccessConfigurationMutation) ClearTargetPort() {
-	m.target_port = nil
-	m.addtarget_port = nil
-	m.clearedFields[remoteaccessconfiguration.FieldTargetPort] = struct{}{}
-}
-
-// TargetPortCleared returns if the "target_port" field was cleared in this mutation.
-func (m *RemoteAccessConfigurationMutation) TargetPortCleared() bool {
-	_, ok := m.clearedFields[remoteaccessconfiguration.FieldTargetPort]
-	return ok
-}
-
-// ResetTargetPort resets all changes to the "target_port" field.
-func (m *RemoteAccessConfigurationMutation) ResetTargetPort() {
-	m.target_port = nil
-	m.addtarget_port = nil
-	delete(m.clearedFields, remoteaccessconfiguration.FieldTargetPort)
 }
 
 // SetCurrentState sets the "current_state" field.
@@ -27343,7 +27221,7 @@ func (m *RemoteAccessConfigurationMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *RemoteAccessConfigurationMutation) Fields() []string {
-	fields := make([]string, 0, 16)
+	fields := make([]string, 0, 14)
 	if m.resource_id != nil {
 		fields = append(fields, remoteaccessconfiguration.FieldResourceID)
 	}
@@ -27361,12 +27239,6 @@ func (m *RemoteAccessConfigurationMutation) Fields() []string {
 	}
 	if m.session_token != nil {
 		fields = append(fields, remoteaccessconfiguration.FieldSessionToken)
-	}
-	if m.target_host != nil {
-		fields = append(fields, remoteaccessconfiguration.FieldTargetHost)
-	}
-	if m.target_port != nil {
-		fields = append(fields, remoteaccessconfiguration.FieldTargetPort)
 	}
 	if m.current_state != nil {
 		fields = append(fields, remoteaccessconfiguration.FieldCurrentState)
@@ -27412,10 +27284,6 @@ func (m *RemoteAccessConfigurationMutation) Field(name string) (ent.Value, bool)
 		return m.User()
 	case remoteaccessconfiguration.FieldSessionToken:
 		return m.SessionToken()
-	case remoteaccessconfiguration.FieldTargetHost:
-		return m.TargetHost()
-	case remoteaccessconfiguration.FieldTargetPort:
-		return m.TargetPort()
 	case remoteaccessconfiguration.FieldCurrentState:
 		return m.CurrentState()
 	case remoteaccessconfiguration.FieldDesiredState:
@@ -27453,10 +27321,6 @@ func (m *RemoteAccessConfigurationMutation) OldField(ctx context.Context, name s
 		return m.OldUser(ctx)
 	case remoteaccessconfiguration.FieldSessionToken:
 		return m.OldSessionToken(ctx)
-	case remoteaccessconfiguration.FieldTargetHost:
-		return m.OldTargetHost(ctx)
-	case remoteaccessconfiguration.FieldTargetPort:
-		return m.OldTargetPort(ctx)
 	case remoteaccessconfiguration.FieldCurrentState:
 		return m.OldCurrentState(ctx)
 	case remoteaccessconfiguration.FieldDesiredState:
@@ -27523,20 +27387,6 @@ func (m *RemoteAccessConfigurationMutation) SetField(name string, value ent.Valu
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetSessionToken(v)
-		return nil
-	case remoteaccessconfiguration.FieldTargetHost:
-		v, ok := value.(string)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetTargetHost(v)
-		return nil
-	case remoteaccessconfiguration.FieldTargetPort:
-		v, ok := value.(uint32)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetTargetPort(v)
 		return nil
 	case remoteaccessconfiguration.FieldCurrentState:
 		v, ok := value.(remoteaccessconfiguration.CurrentState)
@@ -27608,9 +27458,6 @@ func (m *RemoteAccessConfigurationMutation) AddedFields() []string {
 	if m.addlocal_port != nil {
 		fields = append(fields, remoteaccessconfiguration.FieldLocalPort)
 	}
-	if m.addtarget_port != nil {
-		fields = append(fields, remoteaccessconfiguration.FieldTargetPort)
-	}
 	if m.addconfiguration_status_timestamp != nil {
 		fields = append(fields, remoteaccessconfiguration.FieldConfigurationStatusTimestamp)
 	}
@@ -27626,8 +27473,6 @@ func (m *RemoteAccessConfigurationMutation) AddedField(name string) (ent.Value, 
 		return m.AddedExpirationTimestamp()
 	case remoteaccessconfiguration.FieldLocalPort:
 		return m.AddedLocalPort()
-	case remoteaccessconfiguration.FieldTargetPort:
-		return m.AddedTargetPort()
 	case remoteaccessconfiguration.FieldConfigurationStatusTimestamp:
 		return m.AddedConfigurationStatusTimestamp()
 	}
@@ -27652,13 +27497,6 @@ func (m *RemoteAccessConfigurationMutation) AddField(name string, value ent.Valu
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.AddLocalPort(v)
-		return nil
-	case remoteaccessconfiguration.FieldTargetPort:
-		v, ok := value.(int32)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.AddTargetPort(v)
 		return nil
 	case remoteaccessconfiguration.FieldConfigurationStatusTimestamp:
 		v, ok := value.(int64)
@@ -27686,12 +27524,6 @@ func (m *RemoteAccessConfigurationMutation) ClearedFields() []string {
 	}
 	if m.FieldCleared(remoteaccessconfiguration.FieldSessionToken) {
 		fields = append(fields, remoteaccessconfiguration.FieldSessionToken)
-	}
-	if m.FieldCleared(remoteaccessconfiguration.FieldTargetHost) {
-		fields = append(fields, remoteaccessconfiguration.FieldTargetHost)
-	}
-	if m.FieldCleared(remoteaccessconfiguration.FieldTargetPort) {
-		fields = append(fields, remoteaccessconfiguration.FieldTargetPort)
 	}
 	if m.FieldCleared(remoteaccessconfiguration.FieldCurrentState) {
 		fields = append(fields, remoteaccessconfiguration.FieldCurrentState)
@@ -27731,12 +27563,6 @@ func (m *RemoteAccessConfigurationMutation) ClearField(name string) error {
 	case remoteaccessconfiguration.FieldSessionToken:
 		m.ClearSessionToken()
 		return nil
-	case remoteaccessconfiguration.FieldTargetHost:
-		m.ClearTargetHost()
-		return nil
-	case remoteaccessconfiguration.FieldTargetPort:
-		m.ClearTargetPort()
-		return nil
 	case remoteaccessconfiguration.FieldCurrentState:
 		m.ClearCurrentState()
 		return nil
@@ -27774,12 +27600,6 @@ func (m *RemoteAccessConfigurationMutation) ResetField(name string) error {
 		return nil
 	case remoteaccessconfiguration.FieldSessionToken:
 		m.ResetSessionToken()
-		return nil
-	case remoteaccessconfiguration.FieldTargetHost:
-		m.ResetTargetHost()
-		return nil
-	case remoteaccessconfiguration.FieldTargetPort:
-		m.ResetTargetPort()
 		return nil
 	case remoteaccessconfiguration.FieldCurrentState:
 		m.ResetCurrentState()

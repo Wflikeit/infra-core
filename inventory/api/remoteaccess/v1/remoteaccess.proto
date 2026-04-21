@@ -85,20 +85,6 @@ message RemoteAccessConfiguration {
     (buf.validate.field).ignore = IGNORE_IF_UNPOPULATED
   ];
 
-  // Host on the edge side where the agent should forward traffic (e.g. 127.0.0.1). ex. Xterm frontend
-  string target_host = 9 [
-    (ent.field) = { optional: true },
-    (buf.validate.field).string = { min_len: 1, max_len: 255 },
-    (buf.validate.field).ignore = IGNORE_IF_UNPOPULATED
-  ];
-
-  // Port on the edge side where the agent should forward traffic (e.g. 22). ex. Xterm frontend
-  uint32 target_port = 10 [
-    (ent.field) = { optional: true },
-    (buf.validate.field).uint32 = { gte: 1, lte: 65535 },
-    (buf.validate.field).ignore = IGNORE_IF_UNPOPULATED
-  ];
-
   // Expresses current state of remote  access.
   // Managed by resource manager on behalf of provider.
   RemoteAccessState current_state = 11 [(ent.field) = {optional: true}];
