@@ -802,7 +802,7 @@ var (
 		{Name: "session_token", Type: field.TypeString, Nullable: true},
 		{Name: "current_state", Type: field.TypeEnum, Nullable: true, Enums: []string{"REMOTE_ACCESS_STATE_UNSPECIFIED", "REMOTE_ACCESS_STATE_DELETED", "REMOTE_ACCESS_STATE_ERROR", "REMOTE_ACCESS_STATE_ENABLED", "REMOTE_ACCESS_STATE_DISABLED", "REMOTE_ACCESS_STATE_CONFIGURED"}},
 		{Name: "desired_state", Type: field.TypeEnum, Enums: []string{"REMOTE_ACCESS_STATE_UNSPECIFIED", "REMOTE_ACCESS_STATE_DELETED", "REMOTE_ACCESS_STATE_ERROR", "REMOTE_ACCESS_STATE_ENABLED", "REMOTE_ACCESS_STATE_DISABLED", "REMOTE_ACCESS_STATE_CONFIGURED"}},
-		{Name: "configuration_status", Type: field.TypeString, Nullable: true},
+		{Name: "configuration_status_code", Type: field.TypeEnum, Nullable: true, Enums: []string{"REMOTE_ACCESS_CONFIGURATION_STATUS_UNSPECIFIED", "REMOTE_ACCESS_CONFIGURATION_STATUS_PROVISIONING", "REMOTE_ACCESS_CONFIGURATION_STATUS_TUNNEL_ACTIVE", "REMOTE_ACCESS_CONFIGURATION_STATUS_CONNECTION_INACTIVE", "REMOTE_ACCESS_CONFIGURATION_STATUS_OPERATIONAL_ERROR"}},
 		{Name: "configuration_status_indicator", Type: field.TypeEnum, Nullable: true, Enums: []string{"STATUS_INDICATION_UNSPECIFIED", "STATUS_INDICATION_ERROR", "STATUS_INDICATION_IN_PROGRESS", "STATUS_INDICATION_IDLE"}},
 		{Name: "configuration_status_timestamp", Type: field.TypeUint64, Nullable: true},
 		{Name: "tenant_id", Type: field.TypeString},

@@ -232,7 +232,7 @@ func Test_Update_RemoteAccessConfiguration(t *testing.T) {
 
 	randomPort := uint32(inv_testing.GenerateRandInt(1024, 65535))
 	randomUserName := strconv.Itoa(rand.Int())
-	requestedConfigurationStatusMsg := "foobar"
+	requestedConfigurationStatusCode := remoteaccessv1.RemoteAccessConfigurationStatus_REMOTE_ACCESS_CONFIGURATION_STATUS_PROVISIONING
 	requestedConfigurationStatusIndicator := statusv1.StatusIndication_STATUS_INDICATION_IN_PROGRESS
 	updated, err := inv_testing.TestClients[inv_testing.APIClient].Update(
 		context.TODO(),
@@ -242,7 +242,7 @@ func Test_Update_RemoteAccessConfiguration(t *testing.T) {
 			DesiredState:                 remoteaccessv1.RemoteAccessState_REMOTE_ACCESS_STATE_ENABLED,
 			User:                         randomUserName,
 			LocalPort:                    randomPort,
-			ConfigurationStatus:          requestedConfigurationStatusMsg,
+			ConfigurationStatusCode:      requestedConfigurationStatusCode,
 			ConfigurationStatusIndicator: requestedConfigurationStatusIndicator,
 			ConfigurationStatusTimestamp: uint64(time.Now().Unix()),
 		}}})
@@ -256,8 +256,8 @@ func Test_Update_RemoteAccessConfiguration(t *testing.T) {
 	require.NotNil(t, getResp.GetResource().GetRemoteAccess())
 	require.Equal(t, randomPort, getResp.GetResource().GetRemoteAccess().LocalPort, "unexpected port")
 	require.Equal(t, randomUserName, getResp.GetResource().GetRemoteAccess().User, "unexpected user")
-	require.Equal(t, requestedConfigurationStatusMsg, getResp.GetResource().GetRemoteAccess().ConfigurationStatus,
-		"unexpected ConfigurationStatus")
+	require.Equal(t, requestedConfigurationStatusCode, getResp.GetResource().GetRemoteAccess().GetConfigurationStatusCode(),
+		"unexpected ConfigurationStatusCode")
 	require.Equal(t, requestedConfigurationStatusIndicator, getResp.GetResource().GetRemoteAccess().ConfigurationStatusIndicator,
 		"unexpected ConfigurationStatusIndicator")
 	require.Greater(t, getResp.GetResource().GetRemoteAccess().GetConfigurationStatusTimestamp(), uint64(0))

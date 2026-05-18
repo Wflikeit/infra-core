@@ -26365,7 +26365,7 @@ type RemoteAccessConfigurationMutation struct {
 	session_token                     *string
 	current_state                     *remoteaccessconfiguration.CurrentState
 	desired_state                     *remoteaccessconfiguration.DesiredState
-	configuration_status              *string
+	configuration_status_code         *remoteaccessconfiguration.ConfigurationStatusCode
 	configuration_status_indicator    *remoteaccessconfiguration.ConfigurationStatusIndicator
 	configuration_status_timestamp    *uint64
 	addconfiguration_status_timestamp *int64
@@ -26872,53 +26872,53 @@ func (m *RemoteAccessConfigurationMutation) ResetDesiredState() {
 	m.desired_state = nil
 }
 
-// SetConfigurationStatus sets the "configuration_status" field.
-func (m *RemoteAccessConfigurationMutation) SetConfigurationStatus(s string) {
-	m.configuration_status = &s
+// SetConfigurationStatusCode sets the "configuration_status_code" field.
+func (m *RemoteAccessConfigurationMutation) SetConfigurationStatusCode(rsc remoteaccessconfiguration.ConfigurationStatusCode) {
+	m.configuration_status_code = &rsc
 }
 
-// ConfigurationStatus returns the value of the "configuration_status" field in the mutation.
-func (m *RemoteAccessConfigurationMutation) ConfigurationStatus() (r string, exists bool) {
-	v := m.configuration_status
+// ConfigurationStatusCode returns the value of the "configuration_status_code" field in the mutation.
+func (m *RemoteAccessConfigurationMutation) ConfigurationStatusCode() (r remoteaccessconfiguration.ConfigurationStatusCode, exists bool) {
+	v := m.configuration_status_code
 	if v == nil {
 		return
 	}
 	return *v, true
 }
 
-// OldConfigurationStatus returns the old "configuration_status" field's value of the RemoteAccessConfiguration entity.
+// OldConfigurationStatusCode returns the old "configuration_status_code" field's value of the RemoteAccessConfiguration entity.
 // If the RemoteAccessConfiguration object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *RemoteAccessConfigurationMutation) OldConfigurationStatus(ctx context.Context) (v string, err error) {
+func (m *RemoteAccessConfigurationMutation) OldConfigurationStatusCode(ctx context.Context) (v remoteaccessconfiguration.ConfigurationStatusCode, err error) {
 	if !m.op.Is(OpUpdateOne) {
-		return v, errors.New("OldConfigurationStatus is only allowed on UpdateOne operations")
+		return v, errors.New("OldConfigurationStatusCode is only allowed on UpdateOne operations")
 	}
 	if m.id == nil || m.oldValue == nil {
-		return v, errors.New("OldConfigurationStatus requires an ID field in the mutation")
+		return v, errors.New("OldConfigurationStatusCode requires an ID field in the mutation")
 	}
 	oldValue, err := m.oldValue(ctx)
 	if err != nil {
-		return v, fmt.Errorf("querying old value for OldConfigurationStatus: %w", err)
+		return v, fmt.Errorf("querying old value for OldConfigurationStatusCode: %w", err)
 	}
-	return oldValue.ConfigurationStatus, nil
+	return oldValue.ConfigurationStatusCode, nil
 }
 
-// ClearConfigurationStatus clears the value of the "configuration_status" field.
-func (m *RemoteAccessConfigurationMutation) ClearConfigurationStatus() {
-	m.configuration_status = nil
-	m.clearedFields[remoteaccessconfiguration.FieldConfigurationStatus] = struct{}{}
+// ClearConfigurationStatusCode clears the value of the "configuration_status_code" field.
+func (m *RemoteAccessConfigurationMutation) ClearConfigurationStatusCode() {
+	m.configuration_status_code = nil
+	m.clearedFields[remoteaccessconfiguration.FieldConfigurationStatusCode] = struct{}{}
 }
 
-// ConfigurationStatusCleared returns if the "configuration_status" field was cleared in this mutation.
-func (m *RemoteAccessConfigurationMutation) ConfigurationStatusCleared() bool {
-	_, ok := m.clearedFields[remoteaccessconfiguration.FieldConfigurationStatus]
+// ConfigurationStatusCodeCleared returns if the "configuration_status_code" field was cleared in this mutation.
+func (m *RemoteAccessConfigurationMutation) ConfigurationStatusCodeCleared() bool {
+	_, ok := m.clearedFields[remoteaccessconfiguration.FieldConfigurationStatusCode]
 	return ok
 }
 
-// ResetConfigurationStatus resets all changes to the "configuration_status" field.
-func (m *RemoteAccessConfigurationMutation) ResetConfigurationStatus() {
-	m.configuration_status = nil
-	delete(m.clearedFields, remoteaccessconfiguration.FieldConfigurationStatus)
+// ResetConfigurationStatusCode resets all changes to the "configuration_status_code" field.
+func (m *RemoteAccessConfigurationMutation) ResetConfigurationStatusCode() {
+	m.configuration_status_code = nil
+	delete(m.clearedFields, remoteaccessconfiguration.FieldConfigurationStatusCode)
 }
 
 // SetConfigurationStatusIndicator sets the "configuration_status_indicator" field.
@@ -27246,8 +27246,8 @@ func (m *RemoteAccessConfigurationMutation) Fields() []string {
 	if m.desired_state != nil {
 		fields = append(fields, remoteaccessconfiguration.FieldDesiredState)
 	}
-	if m.configuration_status != nil {
-		fields = append(fields, remoteaccessconfiguration.FieldConfigurationStatus)
+	if m.configuration_status_code != nil {
+		fields = append(fields, remoteaccessconfiguration.FieldConfigurationStatusCode)
 	}
 	if m.configuration_status_indicator != nil {
 		fields = append(fields, remoteaccessconfiguration.FieldConfigurationStatusIndicator)
@@ -27288,8 +27288,8 @@ func (m *RemoteAccessConfigurationMutation) Field(name string) (ent.Value, bool)
 		return m.CurrentState()
 	case remoteaccessconfiguration.FieldDesiredState:
 		return m.DesiredState()
-	case remoteaccessconfiguration.FieldConfigurationStatus:
-		return m.ConfigurationStatus()
+	case remoteaccessconfiguration.FieldConfigurationStatusCode:
+		return m.ConfigurationStatusCode()
 	case remoteaccessconfiguration.FieldConfigurationStatusIndicator:
 		return m.ConfigurationStatusIndicator()
 	case remoteaccessconfiguration.FieldConfigurationStatusTimestamp:
@@ -27325,8 +27325,8 @@ func (m *RemoteAccessConfigurationMutation) OldField(ctx context.Context, name s
 		return m.OldCurrentState(ctx)
 	case remoteaccessconfiguration.FieldDesiredState:
 		return m.OldDesiredState(ctx)
-	case remoteaccessconfiguration.FieldConfigurationStatus:
-		return m.OldConfigurationStatus(ctx)
+	case remoteaccessconfiguration.FieldConfigurationStatusCode:
+		return m.OldConfigurationStatusCode(ctx)
 	case remoteaccessconfiguration.FieldConfigurationStatusIndicator:
 		return m.OldConfigurationStatusIndicator(ctx)
 	case remoteaccessconfiguration.FieldConfigurationStatusTimestamp:
@@ -27402,12 +27402,12 @@ func (m *RemoteAccessConfigurationMutation) SetField(name string, value ent.Valu
 		}
 		m.SetDesiredState(v)
 		return nil
-	case remoteaccessconfiguration.FieldConfigurationStatus:
-		v, ok := value.(string)
+	case remoteaccessconfiguration.FieldConfigurationStatusCode:
+		v, ok := value.(remoteaccessconfiguration.ConfigurationStatusCode)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
-		m.SetConfigurationStatus(v)
+		m.SetConfigurationStatusCode(v)
 		return nil
 	case remoteaccessconfiguration.FieldConfigurationStatusIndicator:
 		v, ok := value.(remoteaccessconfiguration.ConfigurationStatusIndicator)
@@ -27528,8 +27528,8 @@ func (m *RemoteAccessConfigurationMutation) ClearedFields() []string {
 	if m.FieldCleared(remoteaccessconfiguration.FieldCurrentState) {
 		fields = append(fields, remoteaccessconfiguration.FieldCurrentState)
 	}
-	if m.FieldCleared(remoteaccessconfiguration.FieldConfigurationStatus) {
-		fields = append(fields, remoteaccessconfiguration.FieldConfigurationStatus)
+	if m.FieldCleared(remoteaccessconfiguration.FieldConfigurationStatusCode) {
+		fields = append(fields, remoteaccessconfiguration.FieldConfigurationStatusCode)
 	}
 	if m.FieldCleared(remoteaccessconfiguration.FieldConfigurationStatusIndicator) {
 		fields = append(fields, remoteaccessconfiguration.FieldConfigurationStatusIndicator)
@@ -27566,8 +27566,8 @@ func (m *RemoteAccessConfigurationMutation) ClearField(name string) error {
 	case remoteaccessconfiguration.FieldCurrentState:
 		m.ClearCurrentState()
 		return nil
-	case remoteaccessconfiguration.FieldConfigurationStatus:
-		m.ClearConfigurationStatus()
+	case remoteaccessconfiguration.FieldConfigurationStatusCode:
+		m.ClearConfigurationStatusCode()
 		return nil
 	case remoteaccessconfiguration.FieldConfigurationStatusIndicator:
 		m.ClearConfigurationStatusIndicator()
@@ -27607,8 +27607,8 @@ func (m *RemoteAccessConfigurationMutation) ResetField(name string) error {
 	case remoteaccessconfiguration.FieldDesiredState:
 		m.ResetDesiredState()
 		return nil
-	case remoteaccessconfiguration.FieldConfigurationStatus:
-		m.ResetConfigurationStatus()
+	case remoteaccessconfiguration.FieldConfigurationStatusCode:
+		m.ResetConfigurationStatusCode()
 		return nil
 	case remoteaccessconfiguration.FieldConfigurationStatusIndicator:
 		m.ResetConfigurationStatusIndicator()

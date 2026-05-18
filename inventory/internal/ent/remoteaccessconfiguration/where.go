@@ -83,11 +83,6 @@ func SessionToken(v string) predicate.RemoteAccessConfiguration {
 	return predicate.RemoteAccessConfiguration(sql.FieldEQ(FieldSessionToken, v))
 }
 
-// ConfigurationStatus applies equality check predicate on the "configuration_status" field. It's identical to ConfigurationStatusEQ.
-func ConfigurationStatus(v string) predicate.RemoteAccessConfiguration {
-	return predicate.RemoteAccessConfiguration(sql.FieldEQ(FieldConfigurationStatus, v))
-}
-
 // ConfigurationStatusTimestamp applies equality check predicate on the "configuration_status_timestamp" field. It's identical to ConfigurationStatusTimestampEQ.
 func ConfigurationStatusTimestamp(v uint64) predicate.RemoteAccessConfiguration {
 	return predicate.RemoteAccessConfiguration(sql.FieldEQ(FieldConfigurationStatusTimestamp, v))
@@ -538,79 +533,34 @@ func DesiredStateNotIn(vs ...DesiredState) predicate.RemoteAccessConfiguration {
 	return predicate.RemoteAccessConfiguration(sql.FieldNotIn(FieldDesiredState, vs...))
 }
 
-// ConfigurationStatusEQ applies the EQ predicate on the "configuration_status" field.
-func ConfigurationStatusEQ(v string) predicate.RemoteAccessConfiguration {
-	return predicate.RemoteAccessConfiguration(sql.FieldEQ(FieldConfigurationStatus, v))
+// ConfigurationStatusCodeEQ applies the EQ predicate on the "configuration_status_code" field.
+func ConfigurationStatusCodeEQ(v ConfigurationStatusCode) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldEQ(FieldConfigurationStatusCode, v))
 }
 
-// ConfigurationStatusNEQ applies the NEQ predicate on the "configuration_status" field.
-func ConfigurationStatusNEQ(v string) predicate.RemoteAccessConfiguration {
-	return predicate.RemoteAccessConfiguration(sql.FieldNEQ(FieldConfigurationStatus, v))
+// ConfigurationStatusCodeNEQ applies the NEQ predicate on the "configuration_status_code" field.
+func ConfigurationStatusCodeNEQ(v ConfigurationStatusCode) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldNEQ(FieldConfigurationStatusCode, v))
 }
 
-// ConfigurationStatusIn applies the In predicate on the "configuration_status" field.
-func ConfigurationStatusIn(vs ...string) predicate.RemoteAccessConfiguration {
-	return predicate.RemoteAccessConfiguration(sql.FieldIn(FieldConfigurationStatus, vs...))
+// ConfigurationStatusCodeIn applies the In predicate on the "configuration_status_code" field.
+func ConfigurationStatusCodeIn(vs ...ConfigurationStatusCode) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldIn(FieldConfigurationStatusCode, vs...))
 }
 
-// ConfigurationStatusNotIn applies the NotIn predicate on the "configuration_status" field.
-func ConfigurationStatusNotIn(vs ...string) predicate.RemoteAccessConfiguration {
-	return predicate.RemoteAccessConfiguration(sql.FieldNotIn(FieldConfigurationStatus, vs...))
+// ConfigurationStatusCodeNotIn applies the NotIn predicate on the "configuration_status_code" field.
+func ConfigurationStatusCodeNotIn(vs ...ConfigurationStatusCode) predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldNotIn(FieldConfigurationStatusCode, vs...))
 }
 
-// ConfigurationStatusGT applies the GT predicate on the "configuration_status" field.
-func ConfigurationStatusGT(v string) predicate.RemoteAccessConfiguration {
-	return predicate.RemoteAccessConfiguration(sql.FieldGT(FieldConfigurationStatus, v))
+// ConfigurationStatusCodeIsNil applies the IsNil predicate on the "configuration_status_code" field.
+func ConfigurationStatusCodeIsNil() predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldIsNull(FieldConfigurationStatusCode))
 }
 
-// ConfigurationStatusGTE applies the GTE predicate on the "configuration_status" field.
-func ConfigurationStatusGTE(v string) predicate.RemoteAccessConfiguration {
-	return predicate.RemoteAccessConfiguration(sql.FieldGTE(FieldConfigurationStatus, v))
-}
-
-// ConfigurationStatusLT applies the LT predicate on the "configuration_status" field.
-func ConfigurationStatusLT(v string) predicate.RemoteAccessConfiguration {
-	return predicate.RemoteAccessConfiguration(sql.FieldLT(FieldConfigurationStatus, v))
-}
-
-// ConfigurationStatusLTE applies the LTE predicate on the "configuration_status" field.
-func ConfigurationStatusLTE(v string) predicate.RemoteAccessConfiguration {
-	return predicate.RemoteAccessConfiguration(sql.FieldLTE(FieldConfigurationStatus, v))
-}
-
-// ConfigurationStatusContains applies the Contains predicate on the "configuration_status" field.
-func ConfigurationStatusContains(v string) predicate.RemoteAccessConfiguration {
-	return predicate.RemoteAccessConfiguration(sql.FieldContains(FieldConfigurationStatus, v))
-}
-
-// ConfigurationStatusHasPrefix applies the HasPrefix predicate on the "configuration_status" field.
-func ConfigurationStatusHasPrefix(v string) predicate.RemoteAccessConfiguration {
-	return predicate.RemoteAccessConfiguration(sql.FieldHasPrefix(FieldConfigurationStatus, v))
-}
-
-// ConfigurationStatusHasSuffix applies the HasSuffix predicate on the "configuration_status" field.
-func ConfigurationStatusHasSuffix(v string) predicate.RemoteAccessConfiguration {
-	return predicate.RemoteAccessConfiguration(sql.FieldHasSuffix(FieldConfigurationStatus, v))
-}
-
-// ConfigurationStatusIsNil applies the IsNil predicate on the "configuration_status" field.
-func ConfigurationStatusIsNil() predicate.RemoteAccessConfiguration {
-	return predicate.RemoteAccessConfiguration(sql.FieldIsNull(FieldConfigurationStatus))
-}
-
-// ConfigurationStatusNotNil applies the NotNil predicate on the "configuration_status" field.
-func ConfigurationStatusNotNil() predicate.RemoteAccessConfiguration {
-	return predicate.RemoteAccessConfiguration(sql.FieldNotNull(FieldConfigurationStatus))
-}
-
-// ConfigurationStatusEqualFold applies the EqualFold predicate on the "configuration_status" field.
-func ConfigurationStatusEqualFold(v string) predicate.RemoteAccessConfiguration {
-	return predicate.RemoteAccessConfiguration(sql.FieldEqualFold(FieldConfigurationStatus, v))
-}
-
-// ConfigurationStatusContainsFold applies the ContainsFold predicate on the "configuration_status" field.
-func ConfigurationStatusContainsFold(v string) predicate.RemoteAccessConfiguration {
-	return predicate.RemoteAccessConfiguration(sql.FieldContainsFold(FieldConfigurationStatus, v))
+// ConfigurationStatusCodeNotNil applies the NotNil predicate on the "configuration_status_code" field.
+func ConfigurationStatusCodeNotNil() predicate.RemoteAccessConfiguration {
+	return predicate.RemoteAccessConfiguration(sql.FieldNotNull(FieldConfigurationStatusCode))
 }
 
 // ConfigurationStatusIndicatorEQ applies the EQ predicate on the "configuration_status_indicator" field.

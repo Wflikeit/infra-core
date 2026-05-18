@@ -312,6 +312,8 @@ func filterRemoteAccessConfiguration(ctx context.Context, client *ent.Client, fi
 
 func enumStateMap(fname string, eint int32) (ent.Value, error) {
 	switch fname {
+	case remoteaccessv1.RemoteAccessConfigurationFieldConfigurationStatusCode:
+		return remoteaccessconfiguration.ConfigurationStatusCode(remoteaccessv1.RemoteAccessConfigurationStatus_name[eint]), nil
 	case remoteaccessv1.RemoteAccessConfigurationFieldConfigurationStatusIndicator:
 		return remoteaccessconfiguration.ConfigurationStatusIndicator(statusv1.StatusIndication_name[eint]), nil
 	case remoteaccessv1.RemoteAccessConfigurationFieldDesiredState:

@@ -595,9 +595,10 @@ func entRemoteAccessConfigurationToProto(entity *ent.RemoteAccessConfiguration) 
 	statusIndicator := statusv1.StatusIndication_value[entity.ConfigurationStatusIndicator.String()]
 	desiredState := remoteaccessv1.RemoteAccessState_value[entity.DesiredState.String()]
 	currentState := remoteaccessv1.RemoteAccessState_value[entity.CurrentState.String()]
+	configurationStatusCode := remoteaccessv1.RemoteAccessConfigurationStatus_value[entity.ConfigurationStatusCode.String()]
 
 	protoResource := &remoteaccessv1.RemoteAccessConfiguration{
-		ConfigurationStatus:          entity.ConfigurationStatus,
+		ConfigurationStatusCode:      remoteaccessv1.RemoteAccessConfigurationStatus(configurationStatusCode),
 		ConfigurationStatusIndicator: statusv1.StatusIndication(statusIndicator),
 		ConfigurationStatusTimestamp: entity.ConfigurationStatusTimestamp,
 

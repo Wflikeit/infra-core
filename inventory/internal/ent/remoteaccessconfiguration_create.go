@@ -108,16 +108,16 @@ func (_c *RemoteAccessConfigurationCreate) SetDesiredState(v remoteaccessconfigu
 	return _c
 }
 
-// SetConfigurationStatus sets the "configuration_status" field.
-func (_c *RemoteAccessConfigurationCreate) SetConfigurationStatus(v string) *RemoteAccessConfigurationCreate {
-	_c.mutation.SetConfigurationStatus(v)
+// SetConfigurationStatusCode sets the "configuration_status_code" field.
+func (_c *RemoteAccessConfigurationCreate) SetConfigurationStatusCode(v remoteaccessconfiguration.ConfigurationStatusCode) *RemoteAccessConfigurationCreate {
+	_c.mutation.SetConfigurationStatusCode(v)
 	return _c
 }
 
-// SetNillableConfigurationStatus sets the "configuration_status" field if the given value is not nil.
-func (_c *RemoteAccessConfigurationCreate) SetNillableConfigurationStatus(v *string) *RemoteAccessConfigurationCreate {
+// SetNillableConfigurationStatusCode sets the "configuration_status_code" field if the given value is not nil.
+func (_c *RemoteAccessConfigurationCreate) SetNillableConfigurationStatusCode(v *remoteaccessconfiguration.ConfigurationStatusCode) *RemoteAccessConfigurationCreate {
 	if v != nil {
-		_c.SetConfigurationStatus(*v)
+		_c.SetConfigurationStatusCode(*v)
 	}
 	return _c
 }
@@ -232,6 +232,11 @@ func (_c *RemoteAccessConfigurationCreate) check() error {
 			return &ValidationError{Name: "desired_state", err: fmt.Errorf(`ent: validator failed for field "RemoteAccessConfiguration.desired_state": %w`, err)}
 		}
 	}
+	if v, ok := _c.mutation.ConfigurationStatusCode(); ok {
+		if err := remoteaccessconfiguration.ConfigurationStatusCodeValidator(v); err != nil {
+			return &ValidationError{Name: "configuration_status_code", err: fmt.Errorf(`ent: validator failed for field "RemoteAccessConfiguration.configuration_status_code": %w`, err)}
+		}
+	}
 	if v, ok := _c.mutation.ConfigurationStatusIndicator(); ok {
 		if err := remoteaccessconfiguration.ConfigurationStatusIndicatorValidator(v); err != nil {
 			return &ValidationError{Name: "configuration_status_indicator", err: fmt.Errorf(`ent: validator failed for field "RemoteAccessConfiguration.configuration_status_indicator": %w`, err)}
@@ -307,9 +312,9 @@ func (_c *RemoteAccessConfigurationCreate) createSpec() (*RemoteAccessConfigurat
 		_spec.SetField(remoteaccessconfiguration.FieldDesiredState, field.TypeEnum, value)
 		_node.DesiredState = value
 	}
-	if value, ok := _c.mutation.ConfigurationStatus(); ok {
-		_spec.SetField(remoteaccessconfiguration.FieldConfigurationStatus, field.TypeString, value)
-		_node.ConfigurationStatus = value
+	if value, ok := _c.mutation.ConfigurationStatusCode(); ok {
+		_spec.SetField(remoteaccessconfiguration.FieldConfigurationStatusCode, field.TypeEnum, value)
+		_node.ConfigurationStatusCode = value
 	}
 	if value, ok := _c.mutation.ConfigurationStatusIndicator(); ok {
 		_spec.SetField(remoteaccessconfiguration.FieldConfigurationStatusIndicator, field.TypeEnum, value)

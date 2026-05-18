@@ -1,4 +1,4 @@
-h1:sw1cNlo3+9mWCr62gj7xX2pNUHVNCkaMDjAHNkFhFy4=
+h1:uB2U87mr13jKuBRYKFDW/nSA9moH4+y73ult02Zk4Bk=
 20230600000000_empty.sql h1:WTkYlwWwrdJjax+pXqrJYBNu1BIdqqnF9WoasjlGLUk=
 20250324165719_all.sql h1:YEGDRbDPwxh5fBkoaGAwXpPu3nDCsCDdrvTt2EzBekk=
 20250520125803_add_osprof_desc.sql h1:RQBqrgNfdTJlElMRdsizeMIRLsfw2Dq1LzzdiIV/JmE=
@@ -21,4 +21,5 @@ h1:sw1cNlo3+9mWCr62gj7xX2pNUHVNCkaMDjAHNkFhFy4=
 20251103070349_add_tls_ca_cert.sql h1:UYrGjsK3nJwVkBoA/fxczxGFzYsh/wKqxAMXbPcWHRI=
 20251127155123_modify_OSUpdateRun_applied_policy_field.sql h1:HIrAbHZFtLI2j2pyiOVBbMj6BjQtnvYxAaAkl6PbRdw=
 20260127052128_modify_acm-ccm.sql h1:hl3kEP5gTAE8CBGSEMEs/3JKPL4PgM0JbejCLJTBnCM=
-20260419192744_remote_access_add_connection_fields.sql h1:0GlI0nuGDSg+dZbjTWN9Gdf6a+FYXyZUR2dlZ+FfPkg=
+20260419192744_remote_access_add_connection_fields.sql h1:veR+gAuha87CP2YNwsIYbZ4/xs9wTdqdXk3jwEKxbK0=
+20260518220000_remote_access_configuration_status_code.sql h1:UfD/t9n+8ogyuipItRFWmnlIkG6EZW+LUrCXTaOve0M=

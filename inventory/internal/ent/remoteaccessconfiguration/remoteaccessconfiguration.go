@@ -30,8 +30,8 @@ const (
 	FieldCurrentState = "current_state"
 	// FieldDesiredState holds the string denoting the desired_state field in the database.
 	FieldDesiredState = "desired_state"
-	// FieldConfigurationStatus holds the string denoting the configuration_status field in the database.
-	FieldConfigurationStatus = "configuration_status"
+	// FieldConfigurationStatusCode holds the string denoting the configuration_status_code field in the database.
+	FieldConfigurationStatusCode = "configuration_status_code"
 	// FieldConfigurationStatusIndicator holds the string denoting the configuration_status_indicator field in the database.
 	FieldConfigurationStatusIndicator = "configuration_status_indicator"
 	// FieldConfigurationStatusTimestamp holds the string denoting the configuration_status_timestamp field in the database.
@@ -66,7 +66,7 @@ var Columns = []string{
 	FieldSessionToken,
 	FieldCurrentState,
 	FieldDesiredState,
-	FieldConfigurationStatus,
+	FieldConfigurationStatusCode,
 	FieldConfigurationStatusIndicator,
 	FieldConfigurationStatusTimestamp,
 	FieldTenantID,
@@ -149,6 +149,32 @@ func DesiredStateValidator(ds DesiredState) error {
 	}
 }
 
+// ConfigurationStatusCode defines the type for the "configuration_status_code" enum field.
+type ConfigurationStatusCode string
+
+// ConfigurationStatusCode values.
+const (
+	ConfigurationStatusCodeREMOTE_ACCESS_CONFIGURATION_STATUS_UNSPECIFIED         ConfigurationStatusCode = "REMOTE_ACCESS_CONFIGURATION_STATUS_UNSPECIFIED"
+	ConfigurationStatusCodeREMOTE_ACCESS_CONFIGURATION_STATUS_PROVISIONING        ConfigurationStatusCode = "REMOTE_ACCESS_CONFIGURATION_STATUS_PROVISIONING"
+	ConfigurationStatusCodeREMOTE_ACCESS_CONFIGURATION_STATUS_TUNNEL_ACTIVE       ConfigurationStatusCode = "REMOTE_ACCESS_CONFIGURATION_STATUS_TUNNEL_ACTIVE"
+	ConfigurationStatusCodeREMOTE_ACCESS_CONFIGURATION_STATUS_CONNECTION_INACTIVE ConfigurationStatusCode = "REMOTE_ACCESS_CONFIGURATION_STATUS_CONNECTION_INACTIVE"
+	ConfigurationStatusCodeREMOTE_ACCESS_CONFIGURATION_STATUS_OPERATIONAL_ERROR   ConfigurationStatusCode = "REMOTE_ACCESS_CONFIGURATION_STATUS_OPERATIONAL_ERROR"
+)
+
+func (csc ConfigurationStatusCode) String() string {
+	return string(csc)
+}
+
+// ConfigurationStatusCodeValidator is a validator for the "configuration_status_code" field enum values. It is called by the builders before save.
+func ConfigurationStatusCodeValidator(csc ConfigurationStatusCode) error {
+	switch csc {
+	case ConfigurationStatusCodeREMOTE_ACCESS_CONFIGURATION_STATUS_UNSPECIFIED, ConfigurationStatusCodeREMOTE_ACCESS_CONFIGURATION_STATUS_PROVISIONING, ConfigurationStatusCodeREMOTE_ACCESS_CONFIGURATION_STATUS_TUNNEL_ACTIVE, ConfigurationStatusCodeREMOTE_ACCESS_CONFIGURATION_STATUS_CONNECTION_INACTIVE, ConfigurationStatusCodeREMOTE_ACCESS_CONFIGURATION_STATUS_OPERATIONAL_ERROR:
+		return nil
+	default:
+		return fmt.Errorf("remoteaccessconfiguration: invalid enum value for configuration_status_code field: %q", csc)
+	}
+}
+
 // ConfigurationStatusIndicator defines the type for the "configuration_status_indicator" enum field.
 type ConfigurationStatusIndicator string
 
@@ -222,9 +248,9 @@ func ByDesiredState(opts ...sql.OrderTermOption) OrderOption {
 	return sql.OrderByField(FieldDesiredState, opts...).ToFunc()
 }
 
-// ByConfigurationStatus orders the results by the configuration_status field.
-func ByConfigurationStatus(opts ...sql.OrderTermOption) OrderOption {
-	return sql.OrderByField(FieldConfigurationStatus, opts...).ToFunc()
+// ByConfigurationStatusCode orders the results by the configuration_status_code field.
+func ByConfigurationStatusCode(opts ...sql.OrderTermOption) OrderOption {
+	return sql.OrderByField(FieldConfigurationStatusCode, opts...).ToFunc()
 }
 
 // ByConfigurationStatusIndicator orders the results by the configuration_status_indicator field.

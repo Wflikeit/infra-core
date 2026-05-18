@@ -92,15 +92,13 @@ message RemoteAccessConfiguration {
   // Expresses desired state of remote access. Set by an administrator.
   RemoteAccessState desired_state = 12;
 
-  // A group of fields describing the remote access configuration.
-  // Configuration status of the resource according to the provider.
-  // configuration_status, configuration_status_indicator and configuration_status_timestamp
-  // should always be updated in one shot.
-  string configuration_status = 13 [
+  // Operational status from RAP only. Do not set on Create — leave unset until RAP's first
+  // reconcile (optional in store). Proto/default read may show UNSPECIFIED (0) meaning
+  // "no status published yet", not a value operators must assign at create time.
+  RemoteAccessConfigurationStatus configuration_status_code = 13 [
     (ent.field) = {optional: true},
-    (buf.validate.field).string = {max_bytes: 1024},
     (buf.validate.field).ignore = IGNORE_IF_UNPOPULATED
-  ]; // textual message that describes the update status of Instance. Set by RMs only.
+  ];
 
   // Indicates interpretation of configuration_status. Set by RMs only.
   status.v1.StatusIndication configuration_status_indicator = 14 [(ent.field) = {optional: true}];
@@ -152,4 +150,19 @@ enum RemoteAccessState {
   REMOTE_ACCESS_STATE_ENABLED = 3;
   REMOTE_ACCESS_STATE_DISABLED = 4;
   REMOTE_ACCESS_STATE_CONFIGURED = 5;
+}
+
+// Operational status written by RAP. RAM reads CONNECTION_INACTIVE for expiry hard-delete;
+// other decisions use current_state / desired_state, not this enum.
+enum RemoteAccessConfigurationStatus {
+  // Default when field omitted (e.g. new RAC before first RAP reconcile). Never required on Create.
+  REMOTE_ACCESS_CONFIGURATION_STATUS_UNSPECIFIED = 0;
+  // RAP: binding/bootstrap in progress; reverse tunnel not yet up (includes former bootstrap pending).
+  REMOTE_ACCESS_CONFIGURATION_STATUS_PROVISIONING = 1;
+  // RAP: edge reverse tunnel listening on local_port.
+  REMOTE_ACCESS_CONFIGURATION_STATUS_TUNNEL_ACTIVE = 2;
+  // RAP: teardown done; RAM waits for this before hard delete after soft-delete.
+  REMOTE_ACCESS_CONFIGURATION_STATUS_CONNECTION_INACTIVE = 3;
+  // RAP: chisel, runtime, or port allocator failure.
+  REMOTE_ACCESS_CONFIGURATION_STATUS_OPERATIONAL_ERROR = 4;
 }

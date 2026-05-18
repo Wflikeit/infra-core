@@ -33,8 +33,8 @@ type RemoteAccessConfiguration struct {
 	CurrentState remoteaccessconfiguration.CurrentState `json:"current_state,omitempty"`
 	// DesiredState holds the value of the "desired_state" field.
 	DesiredState remoteaccessconfiguration.DesiredState `json:"desired_state,omitempty"`
-	// ConfigurationStatus holds the value of the "configuration_status" field.
-	ConfigurationStatus string `json:"configuration_status,omitempty"`
+	// ConfigurationStatusCode holds the value of the "configuration_status_code" field.
+	ConfigurationStatusCode remoteaccessconfiguration.ConfigurationStatusCode `json:"configuration_status_code,omitempty"`
 	// ConfigurationStatusIndicator holds the value of the "configuration_status_indicator" field.
 	ConfigurationStatusIndicator remoteaccessconfiguration.ConfigurationStatusIndicator `json:"configuration_status_indicator,omitempty"`
 	// ConfigurationStatusTimestamp holds the value of the "configuration_status_timestamp" field.
@@ -79,7 +79,7 @@ func (*RemoteAccessConfiguration) scanValues(columns []string) ([]any, error) {
 		switch columns[i] {
 		case remoteaccessconfiguration.FieldID, remoteaccessconfiguration.FieldExpirationTimestamp, remoteaccessconfiguration.FieldLocalPort, remoteaccessconfiguration.FieldConfigurationStatusTimestamp:
 			values[i] = new(sql.NullInt64)
-		case remoteaccessconfiguration.FieldResourceID, remoteaccessconfiguration.FieldProxyHost, remoteaccessconfiguration.FieldUser, remoteaccessconfiguration.FieldSessionToken, remoteaccessconfiguration.FieldCurrentState, remoteaccessconfiguration.FieldDesiredState, remoteaccessconfiguration.FieldConfigurationStatus, remoteaccessconfiguration.FieldConfigurationStatusIndicator, remoteaccessconfiguration.FieldTenantID, remoteaccessconfiguration.FieldCreatedAt, remoteaccessconfiguration.FieldUpdatedAt:
+		case remoteaccessconfiguration.FieldResourceID, remoteaccessconfiguration.FieldProxyHost, remoteaccessconfiguration.FieldUser, remoteaccessconfiguration.FieldSessionToken, remoteaccessconfiguration.FieldCurrentState, remoteaccessconfiguration.FieldDesiredState, remoteaccessconfiguration.FieldConfigurationStatusCode, remoteaccessconfiguration.FieldConfigurationStatusIndicator, remoteaccessconfiguration.FieldTenantID, remoteaccessconfiguration.FieldCreatedAt, remoteaccessconfiguration.FieldUpdatedAt:
 			values[i] = new(sql.NullString)
 		case remoteaccessconfiguration.ForeignKeys[0]: // remote_access_configuration_instance
 			values[i] = new(sql.NullInt64)
@@ -152,11 +152,11 @@ func (_m *RemoteAccessConfiguration) assignValues(columns []string, values []any
 			} else if value.Valid {
 				_m.DesiredState = remoteaccessconfiguration.DesiredState(value.String)
 			}
-		case remoteaccessconfiguration.FieldConfigurationStatus:
+		case remoteaccessconfiguration.FieldConfigurationStatusCode:
 			if value, ok := values[i].(*sql.NullString); !ok {
-				return fmt.Errorf("unexpected type %T for field configuration_status", values[i])
+				return fmt.Errorf("unexpected type %T for field configuration_status_code", values[i])
 			} else if value.Valid {
-				_m.ConfigurationStatus = value.String
+				_m.ConfigurationStatusCode = remoteaccessconfiguration.ConfigurationStatusCode(value.String)
 			}
 		case remoteaccessconfiguration.FieldConfigurationStatusIndicator:
 			if value, ok := values[i].(*sql.NullString); !ok {
@@ -260,8 +260,8 @@ func (_m *RemoteAccessConfiguration) String() string {
 	builder.WriteString("desired_state=")
 	builder.WriteString(fmt.Sprintf("%v", _m.DesiredState))
 	builder.WriteString(", ")
-	builder.WriteString("configuration_status=")
-	builder.WriteString(_m.ConfigurationStatus)
+	builder.WriteString("configuration_status_code=")
+	builder.WriteString(fmt.Sprintf("%v", _m.ConfigurationStatusCode))
 	builder.WriteString(", ")
 	builder.WriteString("configuration_status_indicator=")
 	builder.WriteString(fmt.Sprintf("%v", _m.ConfigurationStatusIndicator))

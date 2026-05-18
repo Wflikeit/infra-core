@@ -15,7 +15,7 @@ const (
 	RemoteAccessConfigurationFieldSessionToken                 = "session_token"
 	RemoteAccessConfigurationFieldCurrentState                 = "current_state"
 	RemoteAccessConfigurationFieldDesiredState                 = "desired_state"
-	RemoteAccessConfigurationFieldConfigurationStatus          = "configuration_status"
+	RemoteAccessConfigurationFieldConfigurationStatusCode      = "configuration_status_code"
 	RemoteAccessConfigurationFieldConfigurationStatusIndicator = "configuration_status_indicator"
 	RemoteAccessConfigurationFieldConfigurationStatusTimestamp = "configuration_status_timestamp"
 	RemoteAccessConfigurationFieldTenantId                     = "tenant_id"

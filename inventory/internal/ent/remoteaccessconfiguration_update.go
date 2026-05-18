@@ -163,23 +163,23 @@ func (_u *RemoteAccessConfigurationUpdate) SetNillableDesiredState(v *remoteacce
 	return _u
 }
 
-// SetConfigurationStatus sets the "configuration_status" field.
-func (_u *RemoteAccessConfigurationUpdate) SetConfigurationStatus(v string) *RemoteAccessConfigurationUpdate {
-	_u.mutation.SetConfigurationStatus(v)
+// SetConfigurationStatusCode sets the "configuration_status_code" field.
+func (_u *RemoteAccessConfigurationUpdate) SetConfigurationStatusCode(v remoteaccessconfiguration.ConfigurationStatusCode) *RemoteAccessConfigurationUpdate {
+	_u.mutation.SetConfigurationStatusCode(v)
 	return _u
 }
 
-// SetNillableConfigurationStatus sets the "configuration_status" field if the given value is not nil.
-func (_u *RemoteAccessConfigurationUpdate) SetNillableConfigurationStatus(v *string) *RemoteAccessConfigurationUpdate {
+// SetNillableConfigurationStatusCode sets the "configuration_status_code" field if the given value is not nil.
+func (_u *RemoteAccessConfigurationUpdate) SetNillableConfigurationStatusCode(v *remoteaccessconfiguration.ConfigurationStatusCode) *RemoteAccessConfigurationUpdate {
 	if v != nil {
-		_u.SetConfigurationStatus(*v)
+		_u.SetConfigurationStatusCode(*v)
 	}
 	return _u
 }
 
-// ClearConfigurationStatus clears the value of the "configuration_status" field.
-func (_u *RemoteAccessConfigurationUpdate) ClearConfigurationStatus() *RemoteAccessConfigurationUpdate {
-	_u.mutation.ClearConfigurationStatus()
+// ClearConfigurationStatusCode clears the value of the "configuration_status_code" field.
+func (_u *RemoteAccessConfigurationUpdate) ClearConfigurationStatusCode() *RemoteAccessConfigurationUpdate {
+	_u.mutation.ClearConfigurationStatusCode()
 	return _u
 }
 
@@ -305,6 +305,11 @@ func (_u *RemoteAccessConfigurationUpdate) check() error {
 			return &ValidationError{Name: "desired_state", err: fmt.Errorf(`ent: validator failed for field "RemoteAccessConfiguration.desired_state": %w`, err)}
 		}
 	}
+	if v, ok := _u.mutation.ConfigurationStatusCode(); ok {
+		if err := remoteaccessconfiguration.ConfigurationStatusCodeValidator(v); err != nil {
+			return &ValidationError{Name: "configuration_status_code", err: fmt.Errorf(`ent: validator failed for field "RemoteAccessConfiguration.configuration_status_code": %w`, err)}
+		}
+	}
 	if v, ok := _u.mutation.ConfigurationStatusIndicator(); ok {
 		if err := remoteaccessconfiguration.ConfigurationStatusIndicatorValidator(v); err != nil {
 			return &ValidationError{Name: "configuration_status_indicator", err: fmt.Errorf(`ent: validator failed for field "RemoteAccessConfiguration.configuration_status_indicator": %w`, err)}
@@ -367,11 +372,11 @@ func (_u *RemoteAccessConfigurationUpdate) sqlSave(ctx context.Context) (_node i
 	if value, ok := _u.mutation.DesiredState(); ok {
 		_spec.SetField(remoteaccessconfiguration.FieldDesiredState, field.TypeEnum, value)
 	}
-	if value, ok := _u.mutation.ConfigurationStatus(); ok {
-		_spec.SetField(remoteaccessconfiguration.FieldConfigurationStatus, field.TypeString, value)
+	if value, ok := _u.mutation.ConfigurationStatusCode(); ok {
+		_spec.SetField(remoteaccessconfiguration.FieldConfigurationStatusCode, field.TypeEnum, value)
 	}
-	if _u.mutation.ConfigurationStatusCleared() {
-		_spec.ClearField(remoteaccessconfiguration.FieldConfigurationStatus, field.TypeString)
+	if _u.mutation.ConfigurationStatusCodeCleared() {
+		_spec.ClearField(remoteaccessconfiguration.FieldConfigurationStatusCode, field.TypeEnum)
 	}
 	if value, ok := _u.mutation.ConfigurationStatusIndicator(); ok {
 		_spec.SetField(remoteaccessconfiguration.FieldConfigurationStatusIndicator, field.TypeEnum, value)
@@ -575,23 +580,23 @@ func (_u *RemoteAccessConfigurationUpdateOne) SetNillableDesiredState(v *remotea
 	return _u
 }
 
-// SetConfigurationStatus sets the "configuration_status" field.
-func (_u *RemoteAccessConfigurationUpdateOne) SetConfigurationStatus(v string) *RemoteAccessConfigurationUpdateOne {
-	_u.mutation.SetConfigurationStatus(v)
+// SetConfigurationStatusCode sets the "configuration_status_code" field.
+func (_u *RemoteAccessConfigurationUpdateOne) SetConfigurationStatusCode(v remoteaccessconfiguration.ConfigurationStatusCode) *RemoteAccessConfigurationUpdateOne {
+	_u.mutation.SetConfigurationStatusCode(v)
 	return _u
 }
 
-// SetNillableConfigurationStatus sets the "configuration_status" field if the given value is not nil.
-func (_u *RemoteAccessConfigurationUpdateOne) SetNillableConfigurationStatus(v *string) *RemoteAccessConfigurationUpdateOne {
+// SetNillableConfigurationStatusCode sets the "configuration_status_code" field if the given value is not nil.
+func (_u *RemoteAccessConfigurationUpdateOne) SetNillableConfigurationStatusCode(v *remoteaccessconfiguration.ConfigurationStatusCode) *RemoteAccessConfigurationUpdateOne {
 	if v != nil {
-		_u.SetConfigurationStatus(*v)
+		_u.SetConfigurationStatusCode(*v)
 	}
 	return _u
 }
 
-// ClearConfigurationStatus clears the value of the "configuration_status" field.
-func (_u *RemoteAccessConfigurationUpdateOne) ClearConfigurationStatus() *RemoteAccessConfigurationUpdateOne {
-	_u.mutation.ClearConfigurationStatus()
+// ClearConfigurationStatusCode clears the value of the "configuration_status_code" field.
+func (_u *RemoteAccessConfigurationUpdateOne) ClearConfigurationStatusCode() *RemoteAccessConfigurationUpdateOne {
+	_u.mutation.ClearConfigurationStatusCode()
 	return _u
 }
 
@@ -730,6 +735,11 @@ func (_u *RemoteAccessConfigurationUpdateOne) check() error {
 			return &ValidationError{Name: "desired_state", err: fmt.Errorf(`ent: validator failed for field "RemoteAccessConfiguration.desired_state": %w`, err)}
 		}
 	}
+	if v, ok := _u.mutation.ConfigurationStatusCode(); ok {
+		if err := remoteaccessconfiguration.ConfigurationStatusCodeValidator(v); err != nil {
+			return &ValidationError{Name: "configuration_status_code", err: fmt.Errorf(`ent: validator failed for field "RemoteAccessConfiguration.configuration_status_code": %w`, err)}
+		}
+	}
 	if v, ok := _u.mutation.ConfigurationStatusIndicator(); ok {
 		if err := remoteaccessconfiguration.ConfigurationStatusIndicatorValidator(v); err != nil {
 			return &ValidationError{Name: "configuration_status_indicator", err: fmt.Errorf(`ent: validator failed for field "RemoteAccessConfiguration.configuration_status_indicator": %w`, err)}
@@ -809,11 +819,11 @@ func (_u *RemoteAccessConfigurationUpdateOne) sqlSave(ctx context.Context) (_nod
 	if value, ok := _u.mutation.DesiredState(); ok {
 		_spec.SetField(remoteaccessconfiguration.FieldDesiredState, field.TypeEnum, value)
 	}
-	if value, ok := _u.mutation.ConfigurationStatus(); ok {
-		_spec.SetField(remoteaccessconfiguration.FieldConfigurationStatus, field.TypeString, value)
+	if value, ok := _u.mutation.ConfigurationStatusCode(); ok {
+		_spec.SetField(remoteaccessconfiguration.FieldConfigurationStatusCode, field.TypeEnum, value)
 	}
-	if _u.mutation.ConfigurationStatusCleared() {
-		_spec.ClearField(remoteaccessconfiguration.FieldConfigurationStatus, field.TypeString)
+	if _u.mutation.ConfigurationStatusCodeCleared() {
+		_spec.ClearField(remoteaccessconfiguration.FieldConfigurationStatusCode, field.TypeEnum)
 	}
 	if value, ok := _u.mutation.ConfigurationStatusIndicator(); ok {
 		_spec.SetField(remoteaccessconfiguration.FieldConfigurationStatusIndicator, field.TypeEnum, value)
