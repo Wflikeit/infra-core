@@ -23,6 +23,28 @@ class RemoteAccessState(betterproto.Enum):
     REMOTE_ACCESS_STATE_CONFIGURED = 5
 
 
+class RemoteAccessConfigurationStatus(betterproto.Enum):
+    """
+    Operational status written by RAP. RAM reads CONNECTION_INACTIVE for expiry
+    hard-delete; other decisions use current_state / desired_state, not this
+    enum.
+    """
+
+    # Default when field omitted (e.g. new RAC before first RAP reconcile). Never
+    # required on Create.
+    REMOTE_ACCESS_CONFIGURATION_STATUS_UNSPECIFIED = 0
+    # RAP: binding/bootstrap in progress; reverse tunnel not yet up (includes
+    # former bootstrap pending).
+    REMOTE_ACCESS_CONFIGURATION_STATUS_PROVISIONING = 1
+    # RAP: edge reverse tunnel listening on local_port.
+    REMOTE_ACCESS_CONFIGURATION_STATUS_TUNNEL_ACTIVE = 2
+    # RAP: teardown done; RAM waits for this before hard delete after soft-
+    # delete.
+    REMOTE_ACCESS_CONFIGURATION_STATUS_CONNECTION_INACTIVE = 3
+    # RAP: chisel, runtime, or port allocator failure.
+    REMOTE_ACCESS_CONFIGURATION_STATUS_OPERATIONAL_ERROR = 4
+
+
 @dataclass
 class RemoteAccessConfiguration(betterproto.Message):
     # resource identifier
@@ -41,22 +63,18 @@ class RemoteAccessConfiguration(betterproto.Message):
     user: str = betterproto.string_field(7)
     # Shared secret or session token for agent authentication to RAP.
     session_token: str = betterproto.string_field(8)
-    # Host on the edge side where the agent should forward traffic (e.g.
-    # 127.0.0.1). ex. Xterm frontend
-    target_host: str = betterproto.string_field(9)
-    # Port on the edge side where the agent should forward traffic (e.g. 22). ex.
-    # Xterm frontend
-    target_port: int = betterproto.uint32_field(10)
     # Expresses current state of remote  access. Managed by resource manager on
     # behalf of provider.
     current_state: "RemoteAccessState" = betterproto.enum_field(11)
     # Expresses desired state of remote access. Set by an administrator.
     desired_state: "RemoteAccessState" = betterproto.enum_field(12)
-    # A group of fields describing the remote access configuration. Configuration
-    # status of the resource according to the provider. configuration_status,
-    # configuration_status_indicator and configuration_status_timestamp should
-    # always be updated in one shot.
-    configuration_status: str = betterproto.string_field(13)
+    # Operational status from RAP only. Do not set on Create — leave unset until
+    # RAP's first reconcile (optional in store). Proto/default read may show
+    # UNSPECIFIED (0) meaning "no status published yet", not a value operators
+    # must assign at create time.
+    configuration_status_code: "RemoteAccessConfigurationStatus" = (
+        betterproto.enum_field(13)
+    )
     # Indicates interpretation of configuration_status. Set by RMs only.
     configuration_status_indicator: v1.StatusIndication = betterproto.enum_field(14)
     # UTC timestamp when status was last changed. Set by RMs only.

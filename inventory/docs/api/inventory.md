@@ -72,6 +72,7 @@
 - [remoteaccess/v1/remoteaccess.proto](#remoteaccess_v1_remoteaccess-proto)
     - [RemoteAccessConfiguration](#remoteaccess-v1-RemoteAccessConfiguration)
   
+    - [RemoteAccessConfigurationStatus](#remoteaccess-v1-RemoteAccessConfigurationStatus)
     - [RemoteAccessState](#remoteaccess-v1-RemoteAccessState)
   
 - [schedule/v1/schedule.proto](#schedule_v1_schedule-proto)
@@ -1297,9 +1298,7 @@ NetworkSegment represents a logical Layer 1 (L1) of the network and a VLAN (i.e.
 | session_token | [string](#string) |  | Shared secret or session token for agent authentication to RAP. |
 | current_state | [RemoteAccessState](#remoteaccess-v1-RemoteAccessState) |  | Expresses current state of remote access. Managed by resource manager on behalf of provider. |
 | desired_state | [RemoteAccessState](#remoteaccess-v1-RemoteAccessState) |  | Expresses desired state of remote access. Set by an administrator. |
-| configuration_status | [string](#string) |  | A group of fields describing the remote access configuration. Configuration status of the resource according to the provider. configuration_status, configuration_status_indicator and configuration_status_timestamp should always be updated in one shot.
-
-textual message that describes the update status of Instance. Set by RMs only. |
+| configuration_status_code | [RemoteAccessConfigurationStatus](#remoteaccess-v1-RemoteAccessConfigurationStatus) |  | Operational status from RAP only. Do not set on Create — leave unset until RAP&#39;s first reconcile (optional in store). Proto/default read may show UNSPECIFIED (0) meaning &#34;no status published yet&#34;, not a value operators must assign at create time. |
 | configuration_status_indicator | [status.v1.StatusIndication](#status-v1-StatusIndication) |  | Indicates interpretation of configuration_status. Set by RMs only. |
 | configuration_status_timestamp | [uint64](#uint64) |  | UTC timestamp when status was last changed. Set by RMs only. |
 | tenant_id | [string](#string) |  | Tenant Identifier |
@@ -1311,6 +1310,22 @@ textual message that describes the update status of Instance. Set by RMs only. |
 
 
  
+
+
+<a name="remoteaccess-v1-RemoteAccessConfigurationStatus"></a>
+
+### RemoteAccessConfigurationStatus
+Operational status written by RAP. RAM reads CONNECTION_INACTIVE for expiry hard-delete;
+other decisions use current_state / desired_state, not this enum.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| REMOTE_ACCESS_CONFIGURATION_STATUS_UNSPECIFIED | 0 | Default when field omitted (e.g. new RAC before first RAP reconcile). Never required on Create. |
+| REMOTE_ACCESS_CONFIGURATION_STATUS_PROVISIONING | 1 | RAP: binding/bootstrap in progress; reverse tunnel not yet up (includes former bootstrap pending). |
+| REMOTE_ACCESS_CONFIGURATION_STATUS_TUNNEL_ACTIVE | 2 | RAP: edge reverse tunnel listening on local_port. |
+| REMOTE_ACCESS_CONFIGURATION_STATUS_CONNECTION_INACTIVE | 3 | RAP: teardown done; RAM waits for this before hard delete after soft-delete. |
+| REMOTE_ACCESS_CONFIGURATION_STATUS_OPERATIONAL_ERROR | 4 | RAP: chisel, runtime, or port allocator failure. |
+
 
 
 <a name="remoteaccess-v1-RemoteAccessState"></a>
